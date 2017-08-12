@@ -85,11 +85,11 @@ const ListCard=(props)=>{
     const classes=props.classes;
     return(
         <div >
-            <NavLink style={{textDecoration:'none'}} to={"/bbc/"+props.id}>
+            {/* <NavLink style={{textDecoration:'none'}} to={"/bbc/"+props.id}> */}
             <ListItem style={{marginTop:'5dp',paddingLeft:'5px',paddingRight:'5px',paddingBottom:'5px',paddingTop:'5px'}}>
                 <Card style={{width:'100%',display:'flex',alignItems:'center',marginLeft:0}}>
 
-                    <CardContent style={{display:'flex',alignItems:'center'}}>
+                    <CardContent style={{float:'left',width:'100%'}}>
                         <Typography  component="h5" style={{}}>
                             {props.title}
                             {/*short*/}
@@ -97,12 +97,12 @@ const ListCard=(props)=>{
                         </Typography>
                     </CardContent>
 
-                    <CardMedia style={{float:'right',marginRight:'5px',marginTop:'5px'}}>
+                    <CardMedia style={{float:'left',marginRight:'5px',marginTop:'5px'}}>
                         <img src={props.img} style={{width:'80px',height:'70px'}}/>
                     </CardMedia>
                 </Card>
             </ListItem>
-            </NavLink>
+            {/* </NavLink> */}
             {/*<Route path="/bbc/:id" component={FullTextDemo}/>*/}
             <Divider/>
         </div>
