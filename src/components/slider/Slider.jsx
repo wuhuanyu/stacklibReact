@@ -1,5 +1,6 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import PropType from 'prop-types';
+import SliderDots from './SliderDots'
 
 import SliderItem from './SliderItem';
 
@@ -19,12 +20,24 @@ class Slider extends Component {
     }
 
     componentDidMount() {
-        let {interval} = this.props;
+        let { interval } = this.props;
+        let _this = this;
+        this.autoPlay();
+    }
+
+    stopPlay() {
+        
+        clearInterval(this.flipper);
+    }
+
+    autoPlay() {
         let _this = this;
         this.flipper = setInterval(function () {
             _this.turn(1);
-        }, interval * 1000)
+        }, _this.props.interval*1000);
     }
+
+
 
     componentWillUmount() {
         // this
@@ -34,27 +47,31 @@ class Slider extends Component {
 
     render() {
 
-        let itemNodes= this.props.items.map((item,idx)=>{
-            return <SliderItem item={item} count = {this.props.items.length} key={'item'+idx}/>
+        let itemNodes = this.props.items.map((item, idx) => {
+            return <SliderItem item={item} count={this.props.items.length} key={'item' + idx} />
         })
 
         return (
             <div style={{
-                overflow:'hidden',
-                width:'100%',
-                position:'relative',
+                overflow: 'hidden',
+                width: '100%',
+                position: 'relative',
             }}>
                 <ul
+                    onMouseOver={this.stopPlay.bind(this)}
+                    onMouseOut={this.autoPlay.bind(this)}
                     style={{
-                    overflow: 'hidden',
-                    position: 'relative',
-                    height: 'auto',
-                    width: this.props.items.length*100 + '%',
-                    left: -this.state.current*100 + '%',
-                    transition: 'left 1s'
-                }}>
-                {itemNodes}
+                        overflow: 'hidden',
+                        position: 'relative',
+                        height: 'auto',
+                        width: this.props.items.length * 100 + '%',
+                        left: -this.state.current * 100 + '%',
+
+                        transition: 'left 1s'
+                    }}>
+                    {itemNodes}
                 </ul>
+                <SliderDots count={this.props.items.length} current={this.state.current} />
             </div>
         )
     }

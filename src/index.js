@@ -27,7 +27,7 @@ const IMAGE_DATA = [
 ];
 
 ReactDOM.render(
-    <Slider items = {IMAGE_DATA} auto = {true} interval = {1.2}/>
-    // <RouterEntry/>
+    // <Slider items = {IMAGE_DATA} auto = {true} interval = {1.2}/>
+    <RouterEntry/>
     , document.getElementById('root'));
 registerServiceWorker();
