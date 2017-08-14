@@ -22,7 +22,6 @@ class SliderItem extends Component {
                     src={item.src}
                     alt={item.alt}
                     style={{
-                    display: 'block',
                     height: 'auto',
                     width: '100%'
                 }}/>
