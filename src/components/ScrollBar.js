@@ -1,6 +1,6 @@
 import React,{Component} from   'react';
 import PropTypes from 'prop-types';
-import {withStyles,createStyleSheet} from 'material-ui/styles';
+import {withStyles} from 'material-ui/styles';
 import IconButton from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 
@@ -18,7 +18,7 @@ import MailIcon from 'material-ui-icons/Mail';
 import DeleteIcon from 'material-ui-icons/Delete';
 import ReportIcon from 'material-ui-icons/Report';
 
-const styleSheet =createStyleSheet(theme=>({
+const styleSheet =theme=>({
     appbar:{
         width:'100%',
         // position:'fixed',
@@ -37,7 +37,7 @@ const styleSheet =createStyleSheet(theme=>({
         width:250,
         flex:'initial',
     }
-}));
+});
 
 
 class TabContainer extends React.Component{
@@ -71,7 +71,7 @@ class ScrollableTab extends Component{
 
     }
 
-    handleChange=(e,index)=>{
+    handleChange(e,index){
         console.log('scroll bar',e);
         this.setState({
             index:index

@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {withStyles,createStyleSheet} from 'material-ui/styles';
+import {withStyles} from 'material-ui/styles';
 import Card,{CardActions,CardContent,CardMedia} from 'material-ui/Card';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
@@ -17,7 +17,7 @@ import {
 } from 'react-router-dom';
 
 
-const CSS=createStyleSheet({
+const CSS=(theme)=>({
     card:{
         // width:'100%',
         maxWidth:'100%',
@@ -33,9 +33,11 @@ const CSS=createStyleSheet({
         display:'block',
         marginLeft:'auto',
         marginRight:'auto',
+        width:'90%',
+        height:'auto'
         // width:'70%',
-        maxWidth:'80%',
-        maxHeight:'70%',
+        // maxWidth:'80%',
+        // maxHeight:'70%',
     }
 
 });
@@ -44,7 +46,7 @@ const Header=(props)=>{
     const classes = props.classes;
     return(
         <div>
-            <NavLink style={{textDecoration:'none'}} to={"/bbc/"+props.id}>
+            {/* <NavLink style={{textDecoration:'none'}} to={"/bbc/"+props.id}> */}
             <Card className={classes.card}>
                 <CardMedia style={{marginLeft:'auto',marginRight:'auto'}}>
                     <div style={{marginLeft:'auto',marginRight:'auto'}}>
@@ -62,7 +64,7 @@ const Header=(props)=>{
                     </Typography>
                 </CardContent>
             </Card>
-            </NavLink>
+            {/* </NavLink> */}
         </div>
     )
 };
@@ -98,7 +100,7 @@ const ListCard=(props)=>{
                     </CardContent>
 
                     <CardMedia style={{float:'left',marginRight:'5px',marginTop:'5px'}}>
-                        <img src={props.img} style={{width:'80px',height:'70px'}}/>
+                        <img src={props.img} style={{width:'80px',height:'auto'}}/>
                     </CardMedia>
                 </Card>
             </ListItem>
