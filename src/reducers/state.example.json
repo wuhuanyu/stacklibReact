@@ -1,0 +1,33 @@
+{
+    "isFething": false,
+    "entities": {
+        "bbc": [{
+                "id": "id",
+                "title": "title",
+                "summary": "summary",
+                "text": "text"
+            },
+            {
+                "id": "id",
+                "title": "title",
+                "summary": "summary",
+                "text": "text"
+            }
+        ],
+
+        "retuers": [{
+                "id": "id",
+                "title": "title",
+                "summary": "summary",
+                "text": "text"
+            },
+            {
+                "id": "id",
+                "title": "title",
+                "summary": "summary",
+                "text": "text"
+            }
+        ]
+    }
+
+}
