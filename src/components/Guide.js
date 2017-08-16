@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import Header, {NewsList, ListCard} from "./CommonItems";
 import MockRep from '../repository/MockRep';
 import noPic from '../repository/nopic.jpg';
+import {connect} from 'react-redux';
+import ToggleFetching from './actions/ToggleFetching';
 
 class Guide extends Component {
     constructor(props) {
@@ -14,7 +16,7 @@ class Guide extends Component {
     }
 
     componentDidMount() {
-        let {fetchedHandler} = this.props;
+        let {fetchedHandler,dispatch} = this.props;
         MockRep
             .withId('da')
             .then(data => {
@@ -24,7 +26,8 @@ class Guide extends Component {
         MockRep
             .withField(3, ['title', '_id', 'image_urls', 'summary'])
             .then(data => {
-                fetchedHandler(true);
+                dispatch(ToggleFetching(false));
+                
                 this.setState({listData: data})
             });
     }
@@ -46,7 +49,14 @@ class Guide extends Component {
 }
 
 Guide.propTypes = {
-    source: PropTypes.string.isRequired
+    source: PropTypes.string.isRequired,
+    dispatch:PropTypes.func.isRequired,
 };
 
-export default Guide;
+function mapStateToProps(state){
+    const {dispatch,isFetching} = state;
+    return {
+        dispatch,isFetching,
+    }
+}
+export default connect(mapStateToProps)(Guide);
