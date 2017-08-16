@@ -1,57 +1,55 @@
-import React,{Component} from 'react';
+import React, {Component} from 'react';
 import {withStyles} from 'material-ui/styles';
-import Card,{CardActions,CardContent,CardMedia} from 'material-ui/Card';
+import Card, {CardActions, CardContent, CardMedia} from 'material-ui/Card';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
-import PropTypes from   'prop-types';
+import PropTypes from 'prop-types';
 import Divider from 'material-ui/Divider';
-import List,{ListItem} from 'material-ui/List';
+import List, {ListItem} from 'material-ui/List';
 import noPic from '../repository/nopic.jpg';
 import noPic1 from '../repository/noPic1.jpg';
-import classNames from  'classnames';
-import {
-    BrowserRouter as Router,
-    Link,
-    Route,
-    NavLink
-} from 'react-router-dom';
+import classNames from 'classnames';
+import {BrowserRouter as Router, Link, Route, NavLink} from 'react-router-dom';
 
-
-const CSS=(theme)=>({
-    card:{
+const CSS = (theme) => ({
+    card: {
         // width:'100%',
-        maxWidth:'100%',
-        marginTop:10,
-        marginLeft:5,
-        marginRight:5,
-
+        maxWidth: '100%',
+        marginTop: 10,
+        marginLeft: 5,
+        marginRight: 5
     },
-    flex:{
-        flex:1
+    flex: {
+        flex: 1
     },
-    img:{
-        display:'block',
-        marginLeft:'auto',
-        marginRight:'auto',
-        width:'90%',
-        height:'auto'
-        // width:'70%',
-        // maxWidth:'80%',
-        // maxHeight:'70%',
+    img: {
+        display: 'block',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        width: '90%',
+        height: 'auto'
+        // width:'70%', maxWidth:'80%', maxHeight:'70%',
     }
 
 });
 
-const Header=(props)=>{
-    const classes = props.classes;
-    return(
-        <div>
-            {/* <NavLink style={{textDecoration:'none'}} to={"/bbc/"+props.id}> */}
-            <Card className={classes.card}>
-                <CardMedia style={{marginLeft:'auto',marginRight:'auto'}}>
-                    <div style={{marginLeft:'auto',marginRight:'auto'}}>
-                        <img src={props.img} className={classes.img} alt="Header"/>
+const Header = (props) => {
 
+    const renderContent = function (props) {
+        let {classes} = props;
+        return (
+            <Card className={classes.card}>
+                <CardMedia
+                    style={{
+                    marginLeft: 'auto',
+                    marginRight: 'auto'
+                }}>
+                    <div
+                        style={{
+                        marginLeft: 'auto',
+                        marginRight: 'auto'
+                    }}>
+                        <img src={props.img} className={classes.img}/>
                     </div>
                 </CardMedia>
 
@@ -64,18 +62,30 @@ const Header=(props)=>{
                     </Typography>
                 </CardContent>
             </Card>
-            {/* </NavLink> */}
+        );
+
+    }
+
+    const classes = props.classes;
+    let content;
+    if (props.title || props.summary) 
+        content = renderContent(props);
+    
+    return (
+
+        <div>
+            {content}
+
         </div>
     )
 };
 
-Header.propTypes={
-    title:PropTypes.string.isRequired,
-    summary:PropTypes.string.isRequired,
-    img:PropTypes.string.isRequired,
-    id:PropTypes.string.isRequired,
+Header.propTypes = {
+    title: PropTypes.string.isRequired,
+    summary: PropTypes.string.isRequired,
+    img: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired
 };
-
 
 /**
  * todo horizontal screen problem
@@ -83,24 +93,51 @@ Header.propTypes={
  * @returns {XML}
  * @constructor
  */
-const ListCard=(props)=>{
-    const classes=props.classes;
-    return(
+const ListCard = (props) => {
+    const classes = props.classes;
+    return (
         <div >
             {/* <NavLink style={{textDecoration:'none'}} to={"/bbc/"+props.id}> */}
-            <ListItem style={{marginTop:'5dp',paddingLeft:'5px',paddingRight:'5px',paddingBottom:'5px',paddingTop:'5px'}}>
-                <Card style={{width:'100%',display:'flex',alignItems:'center',marginLeft:0}}>
+            <ListItem
+                style={{
+                marginTop: '5dp',
+                paddingLeft: '5px',
+                paddingRight: '5px',
+                paddingBottom: '5px',
+                paddingTop: '5px'
+            }}>
+                <Card
+                    style={{
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    marginLeft: 0
+                }}>
 
-                    <CardContent style={{float:'left',width:'100%'}}>
-                        <Typography  component="h5" style={{}}>
+                    <CardContent
+                        style={{
+                        float: 'left',
+                        width: '100%'
+                    }}>
+                        <Typography component="h5" style={{}}>
                             {props.title}
                             {/*short*/}
                             {/*this is long long long long long long long text*/}
                         </Typography>
                     </CardContent>
 
-                    <CardMedia style={{float:'left',marginRight:'5px',marginTop:'5px'}}>
-                        <img src={props.img} style={{width:'80px',height:'auto'}}/>
+                    <CardMedia
+                        style={{
+                        float: 'left',
+                        marginRight: '5px',
+                        marginTop: '5px'
+                    }}>
+                        <img
+                            src={props.img}
+                            style={{
+                            width: '80px',
+                            height: 'auto'
+                        }}/>
                     </CardMedia>
                 </Card>
             </ListItem>
@@ -108,41 +145,47 @@ const ListCard=(props)=>{
             {/*<Route path="/bbc/:id" component={FullTextDemo}/>*/}
             <Divider/>
         </div>
-         // </Router>
+    // </Router>
     );
 };
 
-ListCard.propTypes={
-    title:PropTypes.string.isRequired,
-    id:PropTypes.string.isRequired,
+ListCard.propTypes = {
+    title: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired
 };
 
+const NewsList = (props) => {
+    const data = props.newss;
+    if (data.length > 0) 
+        return (
+            <div>
+                <List>
+                    {data.map((d) =>< ListCard title = {
+                        d.title
+                    }
+                    key = {
+                        d._id
+                    }
+                    img = {
+                        d.image_urls[0]
+                    }
+                    id = {
+                        d._id
+                    } />)
+}
+                </List>
+            </div>
 
-
-
-const NewsList=(props)=>{
-    const data=props.newss;
-    if(data.length>0)
-    return(
-        <div>
-            <List>
-                {data.map(
-                    (d)=><ListCard title={d.title} key={d._id} img={d.image_urls[0]} id={d._id}/>
-                )
-                }
-            </List>
-        </div>
-
-    );
-    return(
+        );
+    return (
         <div></div>
     )
 };
 
-NewsList.propTypes={
-    newss:PropTypes.array.isRequired,
+NewsList.propTypes = {
+    newss: PropTypes.array.isRequired
 };
 
-export {NewsList,ListCard}
+export {NewsList, ListCard}
 // export default {withStyles(CSS)(Header)}
 export default withStyles(CSS)(Header);
