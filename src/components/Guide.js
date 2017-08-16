@@ -35,11 +35,11 @@ class Guide extends Component {
         return (
             <div>
                 <Header
-                    id={state.headerData && state.headerData._id || ''}
-                    title={state.headerData && state.headerData.title || ''}
+                    id={state.headerData && state.headerData._id}
+                    title={state.headerData && state.headerData.title}
                     summary={state.headerData.summary}
-                    img={state.headerData && state.headerData.image_urls[0] || noPic}/>
-                <NewsList newss={state.listData && state.listData || []}/>
+                    img={state.headerData && state.headerData.image_urls[0]}/>
+                <NewsList newss={state.listData && state.listData}/>
             </div>
         )
     }

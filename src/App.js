@@ -66,7 +66,7 @@ class App extends Component {
                     fetchedHandler={this
                     .toggleisFetching
                     .bind(this)}/> 
-                    
+
                 {circularProgress}
             </div>
 
