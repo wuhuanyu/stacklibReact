@@ -1,0 +1,1 @@
+export const RECEIVE_BBC_NEWS = 'RECEIVER_BBC_NEWS';

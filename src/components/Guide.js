@@ -4,45 +4,30 @@ import Header, {NewsList, ListCard} from "./CommonItems";
 import MockRep from '../repository/MockRep';
 import noPic from '../repository/nopic.jpg';
 import {connect} from 'react-redux';
-import ToggleFetching from './actions/ToggleFetching';
-
+import ToggleFetching from '../actions/ToggleFetching';
+import fetchBBC from '../actions/BBCActions';
 class Guide extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            headerData: '',
-            listData: ''
-        }
     }
 
     componentDidMount() {
-        let {fetchedHandler,dispatch} = this.props;
-        MockRep
-            .withId('da')
-            .then(data => {
-                console.log(data);
-                this.setState({headerData: data})
-            });
-        MockRep
-            .withField(3, ['title', '_id', 'image_urls', 'summary'])
-            .then(data => {
-                dispatch(ToggleFetching(false));
-                
-                this.setState({listData: data})
-            });
+        let {dispatch} = this.props;
+        dispatch(fetchBBC());
     }
 
     render() {
-        const props = this.props;
-        const state = this.state;
+        let {entities} = this.props;
+        let bbc = entities.bbc;
+        let headerData=bbc[0];
         return (
             <div>
                 <Header
-                    id={state.headerData && state.headerData._id}
-                    title={state.headerData && state.headerData.title}
-                    summary={state.headerData.summary}
-                    img={state.headerData && state.headerData.image_urls[0]}/>
-                <NewsList newss={state.listData && state.listData}/>
+                    id={headerData && headerData._id}
+                    title={headerData && headerData.title}
+                    summary={headerData&&headerData.summary}
+                    img={headerData && headerData.image_urls[0]}/>
+                <NewsList newss={bbc}/>
             </div>
         )
     }
@@ -50,13 +35,12 @@ class Guide extends Component {
 
 Guide.propTypes = {
     source: PropTypes.string.isRequired,
-    dispatch:PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired,
+    entites: PropTypes.object.isRequired
 };
 
-function mapStateToProps(state){
-    const {dispatch,isFetching} = state;
-    return {
-        dispatch,isFetching,
-    }
+function mapStateToProps(state) {
+    const {dispatch, isFetching, entities} = state;
+    return {dispatch, isFetching, entities}
 }
 export default connect(mapStateToProps)(Guide);

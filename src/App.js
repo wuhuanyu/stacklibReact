@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Guide from './components/Guide';
-import { conect } from 'react-redux';
+import { connect } from 'react-redux';
 import logo from './logo.svg';
 import './App.css';
 import ScrollableTab from './components/ScrollBar'
@@ -9,7 +9,7 @@ import Header from './components/CommonItems';
 import pic from './repository/mockPic.jpg';
 import { NewsList } from "./components/CommonItems"
 import { CircularProgress } from 'material-ui/Progress';
-import configureStore from './src/store/configStore';
+import configureStore from './store/configStore';
 import { withStyles } from 'material-ui/styles';
 import PropType from 'prop-types';
 const styles = theme => ({
@@ -41,29 +41,19 @@ class App extends Component {
         this.setState({ currentTab: this.state.sources[index] });
     }
 
-    // toggleisFetching(fetched) {
-    //     // console.log('data is fetched? ')
-    //     // console.log(fetched);
-    //     this.setState({
-    //         isFetching: !fetched
-    //     })
-    // }
     componentDidMount() { }
     render() {
+        const state= this.state;
         const { classes,isFetching } = this.props;
         let circularProgress = isFetching
             ? <CircularProgress className={classes.progress} />
             : null;
-        // let guide = isFetching? null:<Guide source={state.currentTab}
-        // fetchedHandler={this.toggleisFetching}/>;
         return (
             <div>
                 <ScrollableTab sources={state.sources} handleChange={this.handleSwitchTag} />
                 <Guide
                     source={state.currentTab}
-                    fetchedHandler={this
-                        .toggleisFetching
-                        .bind(this)} />
+                    />
 
                 {circularProgress}
             </div>
@@ -73,7 +63,7 @@ class App extends Component {
 }
 
 App.PropType={
-    classes:PropType.classes.isRequired,
+    classes:PropType.object.isRequired,
     isFetching:PropType.bool.isRequired,
     dispatch:PropType.func.isRequired,
 }
@@ -86,7 +76,7 @@ function mapStateToProps(state) {
     }
 }
 
-export default conect(
+export default connect(
     mapStateToProps
 )(withStyles(styles)(App));
 

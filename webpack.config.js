@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const entry = './src/index.js';
+const entry = './src/main.js';
 
 const outputPath = "./dist"
 
@@ -57,7 +57,7 @@ const config = {
         ]
     },
 
-    plugins: plugins,
+    // plugins: plugins,
     // resolve: {     // root: __dirname, extensions: ['', '.js', '.jsx'] },
 
     devtool: 'source-map'
