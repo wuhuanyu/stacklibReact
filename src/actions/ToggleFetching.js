@@ -1,7 +1,10 @@
 import {TOGGLE_IS_FETCHING} from '../actions/ActionConstants';
-const toggle = (on) => {
-    type : TOGGLE_IS_FETCHING;
-    value : on
+const toggle = function (on) {
+    let action = {
+        type: TOGGLE_IS_FETCHING,
+        isFetching: on
+    }
+    return action;
 };
 
 export default toggle;

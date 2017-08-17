@@ -1,5 +1,6 @@
 import MockRep from '../repository/MockRep';
 import * as types from './ActionConstants';
+import ToggleFetching from './ToggleFetching';
 
 export default function fetchBBC(fields = ['title', 'summary', 'image_urls']) {
     return function (dispatch) {
@@ -7,6 +8,7 @@ export default function fetchBBC(fields = ['title', 'summary', 'image_urls']) {
             .withField(3, fields)
             .then((data) => {
                 console.log(data);
+                dispatch(ToggleFetching(false));
                 dispatch(receiveBBC(data));
             }).catch(e=>console.log(e));
     }

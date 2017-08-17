@@ -1,8 +1,11 @@
 import {TOGGLE_IS_FETCHING} from '../actions/ActionConstants';
-export default function(state=false,action){
-    if(action.type===TOGGLE_IS_FETCHING){
-        return action.value;
+import merge from 'lodash/merge';
+const isFetching = function (state = true, action) {
+    if (action.type === TOGGLE_IS_FETCHING) {
+        return action.isFetching;
+        // console.log('hello');
     }
-    else return state;
+    return state;
 }
 
+export default isFetching;

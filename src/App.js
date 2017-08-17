@@ -70,6 +70,8 @@ App.PropType={
 
 
 function mapStateToProps(state) {
+    console.log('-----from App');
+    console.log(state);
     const { isFetching } = state;
     return {
         isFetching

@@ -9,6 +9,7 @@ import configureStore from './store/configStore';
 
 const store = configureStore();
 
+
 render(
     <Provider store={store}>
         <App/>
