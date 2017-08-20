@@ -14,6 +14,8 @@ export default function fetchBBC(fields = ['title', 'summary', 'image_urls']) {
     }
 }
 
+
+
 function receiveBBC(entities) {
     return {type: types.RECEIVE_BBC_NEWS, entities: entities}
 }

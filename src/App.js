@@ -70,8 +70,6 @@ App.PropType={
 
 
 function mapStateToProps(state) {
-    console.log('-----from App');
-    console.log(state);
     const { isFetching } = state;
     return {
         isFetching
@@ -84,5 +82,4 @@ export default connect(
 
 
 
-// export default withStyles(styles)(App);
 
