@@ -13,9 +13,8 @@ import {BrowserRouter as Router, Link, Route, NavLink} from 'react-router-dom';
 
 const CSS = (theme) => ({
     card: {
-        // width:'100%',
         maxWidth: '100%',
-        marginTop: 10,
+        // marginTop: 10,
         marginLeft: 5,
         marginRight: 5
     },
@@ -24,11 +23,11 @@ const CSS = (theme) => ({
     },
     img: {
         display: 'block',
+        paddingTop:'5px',
         marginLeft: 'auto',
         marginRight: 'auto',
         width: '90%',
         height: 'auto'
-        // width:'70%', maxWidth:'80%', maxHeight:'70%',
     }
 
 });
@@ -38,11 +37,12 @@ const Header = (props) => {
     const renderContent = function (props) {
         let {classes} = props;
         return (
-            <Card className={classes.card}>
+            <Card className={classes.card} elevation={1}>
                 <CardMedia
                     style={{
                     marginLeft: 'auto',
-                    marginRight: 'auto'
+                    marginRight: 'auto',
+                    marginTop:'5px',
                 }}>
                     <div
                         style={{
@@ -97,7 +97,6 @@ const ListCard = (props) => {
     const classes = props.classes;
     return (
         <div >
-            {/* <NavLink style={{textDecoration:'none'}} to={"/bbc/"+props.id}> */}
             <ListItem
                 style={{
                 marginTop: '5dp',
@@ -106,7 +105,7 @@ const ListCard = (props) => {
                 paddingBottom: '5px',
                 paddingTop: '5px'
             }}>
-                <Card
+                <Card elevation={0}
                     style={{
                     width: '100%',
                     display: 'flex',
@@ -119,10 +118,8 @@ const ListCard = (props) => {
                         float: 'left',
                         width: '100%'
                     }}>
-                        <Typography component="h5" style={{}}>
+                        <Typography>
                             {props.title}
-                            {/*short*/}
-                            {/*this is long long long long long long long text*/}
                         </Typography>
                     </CardContent>
 
@@ -141,8 +138,6 @@ const ListCard = (props) => {
                     </CardMedia>
                 </Card>
             </ListItem>
-            {/* </NavLink> */}
-            {/*<Route path="/bbc/:id" component={FullTextDemo}/>*/}
             <Divider/>
         </div>
     // </Router>
@@ -186,6 +181,16 @@ NewsList.propTypes = {
     newss: PropTypes.array.isRequired
 };
 
+
+
+// const NewsListWithTag=(prop)=>{
+
+// }
+
+
+
+
+
+
 export {NewsList, ListCard}
-// export default {withStyles(CSS)(Header)}
 export default withStyles(CSS)(Header);

@@ -1,3 +1,4 @@
+import {BBC, CNN, MBook} from './data';
 const host = "localhost:3001";
 const url = "/api/v1/";
 const defaultDomain = host + url;
@@ -6,36 +7,35 @@ const defaultHeaders = {
     cache: 'default'
 }
 
-import { BBC, CNN, MBook } from './data';
-
-
-
 export const checkTitle = function (data) {
     if (Array.isArray(data)) {
         data.forEach((d) => {
             if (d.title) {
                 let title = d.title;
-                title = title.split(' ').map((word) => {
-                    return word[0].toUpperCase() + word.slice(1);
-                }).join(' ');
+                title = title
+                    .split(' ')
+                    .map((word) => {
+                        return word[0].toUpperCase() + word.slice(1);
+                    })
+                    .join(' ');
                 d.title = title;
             }
         });
         return data;
-    }
-    else if (typeof data === 'object') {
+    } else if (typeof data === 'object') {
         if (data.title) {
             let title = data.title;
-            title = title.split(' ').map((word) => {
-                return word[0].toUpperCase() + word.slice(1);
-            }).join(' ');
+            title = title
+                .split(' ')
+                .map((word) => {
+                    return word[0].toUpperCase() + word.slice(1);
+                })
+                .join(' ');
             data.title = title;
         }
         return data;
     }
 };
-
-
 
 const constructRecentNewsUrl = (source, tag, count = 5, fields) => {
     let url = "http://" + defaultDomain + source + "/recent?";
@@ -95,7 +95,7 @@ const constructIdMedium = (id, fields) => {
     return url;
 }
 
-window.client = (function () {
+export const client = (function () {
 
     let getNewsRecent = function (source, tag, count = 5, fields) {
         return fetch(constructRecentNewsUrl(source, tag, count, fields), defaultHeaders);
@@ -117,16 +117,11 @@ window.client = (function () {
         return fetch(constructRecentMedium(count, fields), defaultHeaders);
     }
 
-    return {
-        getNewsRecent, getNewsById, getNewsByTag,
-        getMediumById,
-        getMediumRecent,
-    }
+    return {getNewsRecent, getNewsById, getNewsByTag, getMediumById, getMediumRecent}
 })();
 
-
 export default function addTimeOut(delay = 1500, func, args) {
-    if (!Array.isArray(args))
+    if (!Array.isArray(args)) 
         throw 'args must be array';
     let promise = new Promise((resolve, reject) => {
         window.setTimeout(() => {
@@ -134,8 +129,7 @@ export default function addTimeOut(delay = 1500, func, args) {
             data = checkTitle(data);
             if (data) {
                 resolve(data);
-            }
-            else {
+            } else {
                 reject(data);
             }
         }, delay);
@@ -143,8 +137,8 @@ export default function addTimeOut(delay = 1500, func, args) {
 
 }
 
-window.mockClient = (() => {
-    getNewsRecent = (source, tag, count = 5, fields) => {
+export const  mockClient = (() => {
+    let getNewsRecent = (source, tag, count = 5, fields) => {
         let func;
         switch (source) {
             case 'bbc':
@@ -153,12 +147,13 @@ window.mockClient = (() => {
             case 'cnn':
                 func = CNN.getRecent;
                 break;
-            default: break;
+            default:
+                break;
         }
-        return addTimeOut(func = func, args = [tag, count, fields])
+        return addTimeOut(func, [tag, count, fields])
     }
 
-    getNewsById = (source, fields) => {
+    let getNewsById = (source, fields) => {
         let func;
         switch (source) {
             case 'bbc':
@@ -167,8 +162,11 @@ window.mockClient = (() => {
             case 'cnn':
                 func = CNN.getRecent;
                 break;
-            default: break;
+            default:
+                break;
         }
-        return addTimeOut(func = func, args = [fields]);
+        return addTimeOut(1500,func, [fields]);
     }
+
+    return {getNewsRecent, getNewsById}
 })();

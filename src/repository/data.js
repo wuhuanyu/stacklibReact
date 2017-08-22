@@ -60,28 +60,9 @@ export const BBCData =
                         "st quality soon\". For the moment, tea drinkers may have to learn to live withou" +
                         "t their favourite brew."
                 ]
-        },
+        }
 
-//         tag: function (tag,count=4) {
 
-//                 return {
-//                         count: this.source.count,
-//                         data: this
-//                                 .source
-//                                 .data
-//                                 .map(news => Object.assign({}, news, {tag: tag}))
-//                 }
-//         },
-
-//         get business() {
-//                 return this.tag('business');
-//         },
-
-//         get life() {
-//                 return this.tag('life');
-//         }
-
-// }
 const MediumData = {
         "_id": "59983e5f4da4161e7c6ad446",
         "crawled_at": 1503149660000,
@@ -146,7 +127,7 @@ const MediumData = {
 
 
 export const BBC = {
-        getById(id, fields) {
+        getById:(id, fields) =>{
                 let data = Object.assign({}, BBCData, { _id: id });
                 let newData = {};
                 data.forEach(f => {
@@ -156,7 +137,7 @@ export const BBC = {
 
         },
 
-        getByTag(tag, count = 5, fields) {
+        getByTag:(tag, count = 5, fields)=> {
                 let data = Object.assign({}, BBCData);
                 let newData = {};
                 data.forEach(f => {
@@ -169,7 +150,7 @@ export const BBC = {
                 return tagData;
         },
         getRecent(tag, count = 5, fields) {
-                return getByTag(tag, count, fields);
+                return this.getByTag(tag, count, fields);
         }
 
 }
@@ -289,7 +270,7 @@ export const CNN = {
                 return tagData;
         },
         getRecent(tag, count = 5, fields) {
-                return getByTag(tag, count, fields);
+                return this.getByTag(tag, count, fields);
         }
 }
 

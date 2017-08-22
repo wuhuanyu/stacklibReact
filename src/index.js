@@ -3,8 +3,7 @@ import {render} from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-// import Drawer from './components/drawer-test'
-
+import * as client from './repository/client'
 import   Modal    from './components/router-test';
 import RouterEntry from './components/RouterEntry';
 import 'typeface-roboto';
@@ -33,6 +32,5 @@ const AppTest = function(props){
 };
 render(
   <App/>
-  // <AppTest/>
     , document.getElementById('root'));
 registerServiceWorker();

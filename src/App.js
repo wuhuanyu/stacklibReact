@@ -53,9 +53,9 @@ class App extends Component {
         const state = this.state;
         let {isFetching} = this.state;
         const {classes} = this.props;
-        let circularProgress = isFetching
-            ? <CircularProgress className={classes.progress}/>
-            : null;
+        // let circularProgress = isFetching
+        //     ? <CircularProgress className={classes.progress}/>
+        //     : null;
         // let guide = isFetching? null:<Guide source={state.currentTab}
         // fetchedHandler={this.toggleisFetching}/>;
         return (
@@ -67,7 +67,7 @@ class App extends Component {
                     .toggleisFetching
                     .bind(this)}/> 
 
-                {circularProgress}
+                {/* {circularProgress} */}
             </div>
 
         )
