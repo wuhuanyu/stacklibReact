@@ -8,8 +8,12 @@ const defaultHeaders = {
 
 const constructRecentNewsUrl = (source, tag, count = 5, fields) => {
     let url = "http://" + defaultDomain + source + "/recent?";
-    let _tag = tag ? "tag=" + tag + "&" : '';
-    let _fields = fields ? "fields=" + fields.join(',') + '&' : '';
+    let _tag = tag
+        ? "tag=" + tag + "&"
+        : '';
+    let _fields = fields
+        ? "fields=" + fields.join(',') + '&'
+        : '';
     let _count = "count=" + count;
 
     url = url + _tag + _fields + _count;
@@ -18,7 +22,9 @@ const constructRecentNewsUrl = (source, tag, count = 5, fields) => {
 };
 const constructIdNewsUrl = (source, id, fields) => {
     let url = "http://" + defaultDomain + source + "/id-" + id + '?';
-    let _fields = fields ? "fields=" + fields.join(',') : '';
+    let _fields = fields
+        ? "fields=" + fields.join(',')
+        : '';
     url = url + fields;
     console.log('[constructIdNewsUrl] url=' + url);
     return url;
@@ -26,13 +32,30 @@ const constructIdNewsUrl = (source, id, fields) => {
 
 const constructTagNewsUrl = (source, tag, count = 5, fields) => {
     let url = "http://" + defaultDomain + source + "/tag-" + tag + '?';
-    let _fields = fields ? "fields=" + fields.join(',') + '&' : '';
+    let _fields = fields
+        ? "fields=" + fields.join(',') + '&'
+        : '';
     let _count = "count=" + count;
     url = url + _fields + count;
     console.log('[constructTagNewsUrl] url=' + url);
     return url;
 }
 
+const constructRecentMedium = (count = 5, fields) => {
+    let url = "http://" + defaultDomain + "medium/recent?"
+    let _count = "count=" + count;
+    let _fields = fields
+        ? "fields=" + fields.join(',') + '&'
+        : '';
+
+    url = url + _fields + count;
+    console.log('[constructMediumRecent] url='+url);
+    return url;
+}
+
+const constructIdMedium=(id,fields)=>{
+    
+}
 
 window.client = (function () {
 
@@ -49,17 +72,9 @@ window.client = (function () {
 
     }
 
-    let getMediumById=(id,fields)=>{
+    let getMediumById = (id, fields) => {}
+    let getMediumRecent = function (count = 5, fields) {}
 
-    }
-    let getMediumRecent=function(count=5,fields){
-
-    }
-
-    return {
-        getNewsRecent,
-        getNewsById,
-        getNewsByTag,
-    }
+    return {getNewsRecent, getNewsById, getNewsByTag}
 
 })();
