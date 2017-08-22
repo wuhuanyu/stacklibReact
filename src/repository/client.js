@@ -6,6 +6,37 @@ const defaultHeaders = {
     cache: 'default'
 }
 
+import { BBC, CNN, MBook } from './data';
+
+
+
+export const checkTitle = function (data) {
+    if (Array.isArray(data)) {
+        data.forEach((d) => {
+            if (d.title) {
+                let title = d.title;
+                title = title.split(' ').map((word) => {
+                    return word[0].toUpperCase() + word.slice(1);
+                }).join(' ');
+                d.title = title;
+            }
+        });
+        return data;
+    }
+    else if (typeof data === 'object') {
+        if (data.title) {
+            let title = data.title;
+            title = title.split(' ').map((word) => {
+                return word[0].toUpperCase() + word.slice(1);
+            }).join(' ');
+            data.title = title;
+        }
+        return data;
+    }
+};
+
+
+
 const constructRecentNewsUrl = (source, tag, count = 5, fields) => {
     let url = "http://" + defaultDomain + source + "/recent?";
     let _tag = tag
@@ -49,12 +80,19 @@ const constructRecentMedium = (count = 5, fields) => {
         : '';
 
     url = url + _fields + count;
-    console.log('[constructMediumRecent] url='+url);
+    console.log('[constructRecentMedium] url=' + url);
     return url;
 }
 
-const constructIdMedium=(id,fields)=>{
-    
+const constructIdMedium = (id, fields) => {
+    let url = "http://" + defaultDomain + "medium/id-" + id;
+    let _fields = fields
+        ? "fields=" + fields.join(',') + '&'
+        : '';
+
+    url = url + _fields;
+    console.log('[constructIdMedium] url=' + url);
+    return url;
 }
 
 window.client = (function () {
@@ -72,9 +110,65 @@ window.client = (function () {
 
     }
 
-    let getMediumById = (id, fields) => {}
-    let getMediumRecent = function (count = 5, fields) {}
+    let getMediumById = (id, fields) => {
+        return fetch(constructIdMedium(id, fields), defaultHeaders);
+    }
+    let getMediumRecent = function (count = 5, fields) {
+        return fetch(constructRecentMedium(count, fields), defaultHeaders);
+    }
 
-    return {getNewsRecent, getNewsById, getNewsByTag}
+    return {
+        getNewsRecent, getNewsById, getNewsByTag,
+        getMediumById,
+        getMediumRecent,
+    }
+})();
 
+
+export default function addTimeOut(delay = 1500, func, args) {
+    if (!Array.isArray(args))
+        throw 'args must be array';
+    let promise = new Promise((resolve, reject) => {
+        window.setTimeout(() => {
+            let data = func.apply(null, args);
+            data = checkTitle(data);
+            if (data) {
+                resolve(data);
+            }
+            else {
+                reject(data);
+            }
+        }, delay);
+    });
+
+}
+
+window.mockClient = (() => {
+    getNewsRecent = (source, tag, count = 5, fields) => {
+        let func;
+        switch (source) {
+            case 'bbc':
+                func = BBC.getRecent;
+                break;
+            case 'cnn':
+                func = CNN.getRecent;
+                break;
+            default: break;
+        }
+        return addTimeOut(func = func, args = [tag, count, fields])
+    }
+
+    getNewsById = (source, fields) => {
+        let func;
+        switch (source) {
+            case 'bbc':
+                func = BBC.getRecent;
+                break;
+            case 'cnn':
+                func = CNN.getRecent;
+                break;
+            default: break;
+        }
+        return addTimeOut(func = func, args = [fields]);
+    }
 })();

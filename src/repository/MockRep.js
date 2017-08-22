@@ -1,3 +1,5 @@
+import checkTitle from './client';
+
 const MockRep=function () {
 
     const BBC={
@@ -177,32 +179,7 @@ const MockRep=function () {
     };
 
 
-    const checkTitle=function (data) {
-        if(Array.isArray(data)) {
-            data.forEach((d) => {
-                if (d.title) {
-                    let title = d.title;
-                    title = title.split(' ').map((word) => {
-                        return word[0].toUpperCase() + word.slice(1);
-                    }).join(' ');
-                    d.title = title;
-                }
-            });
-            return data;
-        }
-        else if(typeof data==='object'){
-            if(data.title){
-                let title = data.title;
-                title = title.split(' ').map((word) => {
-                    return word[0].toUpperCase() + word.slice(1);
-                }).join(' ');
-                data.title = title;
-            }
-            return data;
-        }
-    };
-
-
+    
     const withId=(id)=>{
         let promise =new Promise((resolve,reject)=>{
             window.setTimeout(()=>{
