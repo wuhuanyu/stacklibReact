@@ -120,12 +120,12 @@ export const client = (function () {
     return {getNewsRecent, getNewsById, getNewsByTag, getMediumById, getMediumRecent}
 })();
 
-export default function addTimeOut(delay = 1500, func, args) {
+export default function addTimeOut(delay = 1500,obj,func, args) {
     if (!Array.isArray(args)) 
         throw 'args must be array';
     let promise = new Promise((resolve, reject) => {
         window.setTimeout(() => {
-            let data = func.apply(null, args);
+            let data = func.apply(obj, args);
             data = checkTitle(data);
             if (data) {
                 resolve(data);
@@ -135,37 +135,43 @@ export default function addTimeOut(delay = 1500, func, args) {
         }, delay);
     });
 
+    return promise;
+
 }
 
 export const  mockClient = (() => {
     let getNewsRecent = (source, tag, count = 5, fields) => {
-        let func;
+        let func,obj
         switch (source) {
             case 'bbc':
                 func = BBC.getRecent;
+                obj=BBC;
                 break;
             case 'cnn':
                 func = CNN.getRecent;
+                obj=CNN;
                 break;
             default:
                 break;
         }
-        return addTimeOut(func, [tag, count, fields])
+        return addTimeOut(1500,obj,func, [tag, count, fields])
     }
 
     let getNewsById = (source, fields) => {
-        let func;
+        let func,obj
         switch (source) {
             case 'bbc':
                 func = BBC.getRecent;
+                obj=BBC;
                 break;
             case 'cnn':
                 func = CNN.getRecent;
+                obj=CNN;
                 break;
             default:
                 break;
         }
-        return addTimeOut(1500,func, [fields]);
+        return addTimeOut(1500,obj,func, [fields]);
     }
 
     return {getNewsRecent, getNewsById}

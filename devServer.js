@@ -12,7 +12,7 @@ app.get('*',function(req,res){
 });
 
 const port = 3000;
-app.listen(port,'localhost',function(e){
+app.listen(port,'0.0.0.0',function(e){
     if(e){
         console.log(e);
     } else{

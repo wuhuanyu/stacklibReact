@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Header, {NewsList, ListCard} from "./CommonItems";
 import MockRep from '../repository/MockRep';
 import noPic from '../repository/nopic.jpg';
+import NewsByTag from './newscategory/NewsByTag';
 
 class Guide extends Component {
     constructor(props) {
@@ -39,7 +40,8 @@ class Guide extends Component {
                     title={state.headerData && state.headerData.title}
                     summary={state.headerData.summary}
                     img={state.headerData && state.headerData.image_urls[0]}/>
-                <NewsList newss={state.listData && state.listData}/>
+                <NewsByTag source={'bbc'} tag={'Politics'}/>
+                {/* <NewsList newss={state.listData && state.listData}/> */}
             </div>
         )
     }

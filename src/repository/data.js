@@ -130,7 +130,7 @@ export const BBC = {
         getById:(id, fields) =>{
                 let data = Object.assign({}, BBCData, { _id: id });
                 let newData = {};
-                data.forEach(f => {
+                fields.forEach(f => {
                         newData[f] = data[f];
                 })
                 return { count: 1, data: newData };
@@ -140,7 +140,7 @@ export const BBC = {
         getByTag:(tag, count = 5, fields)=> {
                 let data = Object.assign({}, BBCData);
                 let newData = {};
-                data.forEach(f => {
+                fields.forEach(f => {
                         newData[f] = data[f];
                 });
                 let tagData = { count: count, data: [] };
