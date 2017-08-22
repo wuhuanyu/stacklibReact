@@ -16,12 +16,14 @@
     "typeface-roboto": "0.0.31"
   },
   "scripts": {
-    "start" : "react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "@types/react": "^16.0.3",
+    "@types/react-dom": "^15.5.4",
     "babel-core": "^6.25.0",
     "babel-loader": "^7.1.1",
     "babel-plugin-add-module-exports": "^0.2.1",
