@@ -33,6 +33,10 @@ class Guide extends Component {
     render() {
         const props = this.props;
         const state = this.state;
+
+        let newsbytags = [['Politics','politics.jpg'],['Tech','tech.jpg']].map(([t,url])=>{
+            return (<NewsByTag source={'bbc'} tag={t} tag_img_url={'http://localhost:3001/imgs/'+url}/>);
+        })
         return (
             <div>
                 <Header
@@ -40,8 +44,8 @@ class Guide extends Component {
                     title={state.headerData && state.headerData.title}
                     summary={state.headerData.summary}
                     img={state.headerData && state.headerData.image_urls[0]}/>
-                <NewsByTag source={'bbc'} tag={'Politics'}/>
-                {/* <NewsList newss={state.listData && state.listData}/> */}
+                    {newsbytags}
+                {/* <NewsByTag source={'bbc'} tag={'Politics'} ta/> */}
             </div>
         )
     }

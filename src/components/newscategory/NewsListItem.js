@@ -29,10 +29,9 @@ const NewsListItem = (props) => {
 
                     <CardContent
                         style={{
-                        float: 'left',
                         width: '100%'
                     }}>
-                        <Typography>
+                        <Typography type="subheading">
                             {title}
                         </Typography>
                     </CardContent>
@@ -47,6 +46,7 @@ const NewsListItem = (props) => {
                             alt={"Eh,Something fails"}
                             src={img}
                             style={{
+                                
                             width: '80px',
                             height: 'auto'
                         }}/>
