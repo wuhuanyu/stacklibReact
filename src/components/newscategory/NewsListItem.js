@@ -46,7 +46,7 @@ const NewsListItem = (props) => {
                             alt={"Eh,Something fails"}
                             src={img}
                             style={{
-                                
+
                             width: '80px',
                             height: 'auto'
                         }}/>
@@ -62,6 +62,7 @@ const NewsListItem = (props) => {
 NewsListItem.PropTypes = {
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
+    time:PropTypes.string.isRequired,
 }
 
 
