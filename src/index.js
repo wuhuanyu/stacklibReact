@@ -4,8 +4,6 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import * as client from './repository/client'
-import   Modal    from './components/router-test';
-import RouterEntry from './components/RouterEntry';
 import 'typeface-roboto';
 // import Slider from './components/slider/Slider';
 

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Guide from './components/Guide';
 import logo from './logo.svg';
 import './App.css';
 import ScrollableTab from './components/ScrollBar'
@@ -8,6 +7,8 @@ import Header from './components/CommonItems';
 import pic from './repository/mockPic.jpg';
 import {NewsList} from "./components/CommonItems"
 import {CircularProgress} from 'material-ui/Progress';
+import BlogItem from './components/blog/BlogItem';
+import MainContainer from './MainContainer';
 
 import {withStyles} from 'material-ui/styles';
 
@@ -31,9 +32,6 @@ class App extends Component {
             isFetching: true
         };
 
-        this.handleSwitchTag = this
-            .handleSwitchTag
-            .bind(this);
     }
 
     handleSwitchTag(e, index) {
@@ -50,16 +48,10 @@ class App extends Component {
         const state = this.state;
         let {isFetching} = this.state;
         const {classes} = this.props;
-        
         return (
             <div>
-                <ScrollableTab sources={state.sources} handleChange={this.handleSwitchTag}/>
-                <Guide
-                    source={state.currentTab}
-                    fetchedHandler={this
-                    .toggleisFetching
-                    .bind(this)}/> 
-
+                <ScrollableTab sources={state.sources} handleChange={this.handleSwitchTag.bind(this)}/>
+                <MainContainer source={state.currentTab.toLowerCase()}/>
             </div>
 
         )
