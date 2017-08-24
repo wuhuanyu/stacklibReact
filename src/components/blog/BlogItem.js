@@ -7,16 +7,31 @@ import Paper from 'material-ui/Paper';
 import List, {ListItem} from 'material-ui/List';
 import Card,{CardContent, CardMedia,CardHeader,CardActions} from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
-import NewsListItem from './NewsListItem';
 import Avatar from 'material-ui/Avatar';
 import Chip from 'material-ui/Chip';
 import ButtonBase from 'material-ui/ButtonBase';
 import IconButton from 'material-ui/IconButton';
+import red from 'material-ui/colors/red';
 
 
-const CSS = theme=>{
+const CSS = theme=>({
+    card:{
+        margin:'5px 2px 1px 2px',
+        radius:'20px',
+        zIndex:1
+    },
+    image:{
 
-}
+        width:'100%',
+        minHeight:200,
+        backgroundSize:'cover',
+    },
+
+    avatar:{
+        background:red[500],
+    }
+
+})
 
 class BlogItem extends Component{
     constructor(props){
@@ -25,21 +40,26 @@ class BlogItem extends Component{
 
 
     render(){
-        let {title,crawled_at,img_url,summary}=this.props;
+        let {title,crawled_at,img_url,summary,classes}=this.props;
+        console.log(img_url);
+
         return (
             <div>
-                <Card>
+                <Card className={classes.card}>
                     <CardHeader avatar={
-                        <Avatar>{title[0].toUppperCase()}</Avatar>
+                        <Avatar className={classes.avatar}>{title[0].toUpperCase()}</Avatar>
                     }
                     title={title}
                     subheader={crawled_at}
                     />
+                    <CardMedia  className={classes.image} image={img_url}/>
+
                 <CardContent>
                     <Typography component="p">
                         {summary}
                     </Typography>
                 </CardContent>
+                
                 <CardActions disableActionSpacing>
                    <IconButton aria-label="Add to favorites">
                        <FavoriteIcon/>
@@ -62,7 +82,8 @@ BlogItem.PropTypes={
     crawled_at:PropTypes.string.isRequrired,
     img_url:PropTypes.string.isRequrired,
     summary:PropTypes.string.isRequrired,
+    classeds:PropTypes.object.isRequrired,
 }
 
 
-
+export default withStyles(CSS)(BlogItem);
