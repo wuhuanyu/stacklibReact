@@ -159,7 +159,7 @@ export const mockClient = (() => {
             default:
                 break;
         }
-        return addTimeOut(0, obj, func, [tag, count, fields])
+        return addTimeOut(1500, obj, func, [tag, count, fields])
     }
 
     let getNewsById = (source, fields) => {

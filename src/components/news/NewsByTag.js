@@ -14,23 +14,15 @@ import Tag from './Tag';
 class NewsByTag extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            data: []
-        }
-    }
-
-    componentDidMount() {
     }
 
     render() {
-        let {data} = this.state;
-        let {tag, classes, tag_img_url} = this.props;
-
-        let items = data.map(d =>< NewsListItem title = {
+        const {newss,classes,tag_img_url,tag}=this.props;
+        let items = newss.map(d =>< NewsListItem title = {
             d.title
         }
         img = {
-            d.image_urls[0]
+            d.image_urls?d.image_urls[0]:null
         }
         id = {
             d._id
@@ -42,7 +34,8 @@ class NewsByTag extends Component {
                 marginLeft: '5px',
                 marginRight: '5px'
             }}>
-                <Tag tag={tag} tag_img_url={tag_img_url}/> {items}
+                <Tag tag={tag} tag_img_url={tag_img_url}/> 
+                {items}
             </div>
 
         );
@@ -51,9 +44,10 @@ class NewsByTag extends Component {
 
 NewsByTag.PropTypes = {
     source: PropTypes.string.isRequired,
-    tag: PropTypes.string.isRequired,
+    newss:PropTypes.array.isRequired,
     classes: PropTypes.object.isRequired,
-    tag_img_url: PropTypes.string.isRequired
+    tag_img_url:PropTypes.object.isRequired,
+    tag:PropTypes.string.isRequired,
 }
 
 export default NewsByTag;
