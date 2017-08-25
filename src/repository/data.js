@@ -508,7 +508,7 @@ export const CNN = {
         getById(id, fields) {
                 let data = Object.assign({}, CNNData, {_id: id});
                 let newData = {};
-                data.forEach(f => {
+                fields.forEach(f => {
                         newData[f] = data[f];
                 })
                 return {count: 1, data: newData};
@@ -518,7 +518,7 @@ export const CNN = {
         getByTag(tag, count = 5, fields) {
                 let data = Object.assign({}, CNNData);
                 let newData = {};
-                data.forEach(f => {
+                fields.forEach(f => {
                         newData[f] = data[f];
                 });
                 let tagData = {
@@ -645,7 +645,7 @@ export const Reuters = {
         getById(id, fields) {
                 let data = Object.assign({}, ReutersData, {_id: id});
                 let newData = {};
-                data.forEach(f => 
+                fields.forEach(f => 
                         newData[f] = data[f]
                 )
                 return {count: 1, data: newData};
@@ -655,7 +655,7 @@ export const Reuters = {
         getByTag(tag, count = 5, fields) {
                 let data = Object.assign({}, ReutersData);
                 let newData = {};
-                data.forEach(f => {
+                fields.forEach(f => {
                         newData[f] = data[f];
                 });
                 let tagData = {

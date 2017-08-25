@@ -17,7 +17,9 @@ class NewsByTag extends Component {
     }
 
     render() {
-        const {newss,classes,tag_img_url,tag}=this.props;
+        let {newss,classes,tag_img_url,tag}=this.props;
+        console.log('----------from news by tag');
+        console.log(newss[0]);
         let items = newss.map(d =>< NewsListItem title = {
             d.title
         }

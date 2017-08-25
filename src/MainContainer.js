@@ -3,32 +3,36 @@ import PropTypes from 'prop-types';
 import Guide from './components/news/Guide';
 
 class MainContainer extends Component {
-
     constructor(props) {
         super(props);
+        this.state={
+            source:props.source
+        }
     }
 
     renderContent(source) {
-        console.log('---------- from main container');
-        console.log('----rendering'+source);
+        let content;
         switch (source) {
             case 'bbc':
-                return (<Guide source={source}/>);
+                content = <Guide key={source} source={source}/>;
                 break;
             case 'cnn':
-                return (<Guide source={source}/>);
+                content = <Guide key={source} source={source}/>;
                 break;
             case 'reuters':
-                return (<Guide source={source}/>);
+                content = <Guide key={source} source={source}/>;
                 break;
             default:
-                return null;
+                content = null;
                 break;
         }
+
+        return content;
     }
     render() {
         let {source} = this.props;
         return this.renderContent(source);
+
     }
 }
 

@@ -35,13 +35,13 @@ class App extends Component {
 
     handleSwitchTag(e,index) {
         this.setState({current:index});
+        this.forceUpdate();
     }
 
     
     componentDidMount() {}
     render() {
-        const {isFetching,sources,current} = this.state;
-        const {classes} = this.props;
+        let {isFetching,sources,current} = this.state;
         return (
             <div>
                 <ScrollableTab sources={sources} handleChange={this.handleSwitchTag.bind(this)} current={current}/>
