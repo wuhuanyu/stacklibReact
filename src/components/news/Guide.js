@@ -1,49 +1,65 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-// import Header, {NewsList, ListCard} from "./CommonItems";
 import MockRep from '../..//repository/MockRep';
 import noPic from '../../repository/nopic.jpg';
 import NewsByTag from './NewsByTag';
 import Header from './Header';
+import {mockClient} from '../../repository/client';
+import {NewsTags, NewsListItemFields} from '../../constants/Constants';
+
+const cloneDeep = require('clone-deep');
 
 class Guide extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            headerData: '',
-            listData: ''
+            headerData: {},
+            listData: {}
         }
     }
 
     componentDidMount() {
-        MockRep
-            .withId('da')
+        console.log('----------from Guide');
+        const {source} = this.props;
+        console.log('fetch data '+ source);
+        NewsTags.forEach(tag => mockClient.getNewsRecent(source, tag, 1, NewsListItemFields).then(data => {
+            // console.log(data);
+            let newListData = cloneDeep(this.state.listData);
+            newListData[tag] = data.data;
+            console.log(newListData);
+
+            this.setState({listData: newListData})
+        }));
+        mockClient
+            .getNewsRecent(source, 'world', 1, NewsListItemFields)
             .then(data => {
-                console.log(data);
-                this.setState({headerData: data})
-            });
-        MockRep
-            .withField(3, ['title', '_id', 'image_urls', 'summary'])
-            .then(data => {
-                this.setState({listData: data})
-            });
+                this.setState({headerData: data.data});
+            })
     }
 
     render() {
-        const props = this.props;
+        let {listData} = this.state;
         const state = this.state;
-        const {source} =props
-
-        let newsbytags = [['Politics','politics.jpg'],['Tech','tech.jpg']].map(([t,url],idx)=>{
-            return (<NewsByTag source={source} tag={t} tag_img_url={'http://localhost:3001/imgs/'+url} id={idx}/>);
-        })
+        let {source} = this.props;
+        let newsbytags = Object
+            .getOwnPropertyNames(listData)
+            .forEach(tag => {
+                let dataByTag = listData[tag];
+                
+                return (<NewsByTag
+                    source={source}
+                    tag={tag}
+                    tag_img_url={dataByTag.image_urls
+                    ? dataByTag.image_urls[0]
+                    : null}/>)
+            });
         return (
             <div>
                 <Header
                     id={state.headerData && state.headerData._id}
                     title={state.headerData && state.headerData.title}
                     summary={state.headerData.summary}
-                    img={state.headerData && state.headerData.image_urls[0]}/>
+                    img={state.headerData.image_urls && state.headerData.image_urls[0]}/> 
                     {newsbytags}
             </div>
         )

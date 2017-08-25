@@ -40,21 +40,6 @@ const styleSheet =theme=>({
 });
 
 
-class TabContainer extends React.Component{
-    constructor(props){
-        super(props);
-        this.propTypes={
-            children:PropTypes.node.isRequired,
-        }
-    }
-    render(){
-        return (
-            <div style={{padding:24}}>
-                {this.props.children}
-            </div>
-        )
-    }
-}
 
 class ScrollableTab extends Component{
     constructor(props){
@@ -71,12 +56,7 @@ class ScrollableTab extends Component{
 
     }
 
-    handleChange(e,index){
-        console.log('scroll bar',e);
-        this.setState({
-            index:index
-        });
-    };
+   
     handleClose(){
         this.setState({
             open: false,
@@ -93,6 +73,7 @@ class ScrollableTab extends Component{
         const classes= this.props.classes;
         const props = this.props;
         const state=this.state;
+        const {current} =this.props;
         return (
             <div>
                 <LeftDrawer open={state.open} onRequestClose={this.handleClose}/>
@@ -102,7 +83,7 @@ class ScrollableTab extends Component{
                     </IconButton>
                     <Tabs
                         className={classes.flexTabs}
-                        index={this.state.index}
+                        value={current}
                         onChange={props.handleChange}
                         indicatorColor="contrast"
                         textColor="primary"
@@ -111,12 +92,7 @@ class ScrollableTab extends Component{
                         scrollButtons="auto"
                     >
                         {props.sources.map((source,index)=><Tab label={source} key={index}/>)}
-                        {/*<Tab label="BBC"/>*/}
-                        {/*<Tab label="Reuters"/>*/}
-                        {/*<Tab label="Medium"/>*/}
-                        {/*<Tab label="Reuters"/>*/}
-                        {/*<Tab label="Medium"/>*/}
-                        {/*<Tab label="Reddit"/>*/}
+                        
                     </Tabs>
                 </AppBar>
             </div>
@@ -126,6 +102,7 @@ class ScrollableTab extends Component{
 ScrollableTab.propTypes={
     classes:PropTypes.object.isRequired,
     sources:PropTypes.array.isRequired,
+    current:PropTypes.number.isRequired,
 };
 
 export default withStyles(styleSheet)(ScrollableTab);

@@ -1,4 +1,4 @@
-import {BBC, CNN, MBook} from './data';
+import {BBC, CNN, MBook, Reuters} from './data';
 const host = "localhost:3001";
 const url = "/api/v1/";
 const defaultDomain = host + url;
@@ -120,7 +120,7 @@ export const client = (function () {
     return {getNewsRecent, getNewsById, getNewsByTag, getMediumById, getMediumRecent}
 })();
 
-export default function addTimeOut(delay = 1500,obj,func, args) {
+export function addTimeOut(delay = 1500, obj, func, args) {
     if (!Array.isArray(args)) 
         throw 'args must be array';
     let promise = new Promise((resolve, reject) => {
@@ -139,39 +139,49 @@ export default function addTimeOut(delay = 1500,obj,func, args) {
 
 }
 
-export const  mockClient = (() => {
+export const mockClient = (() => {
     let getNewsRecent = (source, tag, count = 5, fields) => {
-        let func,obj
+        let func,
+            obj
         switch (source) {
             case 'bbc':
                 func = BBC.getRecent;
-                obj=BBC;
+                obj = BBC;
                 break;
             case 'cnn':
                 func = CNN.getRecent;
-                obj=CNN;
+                obj = CNN;
                 break;
+
+            case 'reuters':
+                func = Reuters.getRecent;
+                obj = Reuters;
             default:
                 break;
         }
-        return addTimeOut(1500,obj,func, [tag, count, fields])
+        return addTimeOut(0, obj, func, [tag, count, fields])
     }
 
     let getNewsById = (source, fields) => {
-        let func,obj
+        let func,
+            obj
         switch (source) {
             case 'bbc':
-                func = BBC.getRecent;
-                obj=BBC;
+                func = BBC.getById;
+                obj = BBC;
                 break;
             case 'cnn':
-                func = CNN.getRecent;
-                obj=CNN;
+                func = CNN.getById;
+                obj = CNN;
+                break;
+            case 'reuters':
+                func = Reuters.getById;
+                obj = Reuters;
                 break;
             default:
                 break;
         }
-        return addTimeOut(1500,obj,func, [fields]);
+        return addTimeOut(1500, obj, func, [fields]);
     }
 
     return {getNewsRecent, getNewsById}

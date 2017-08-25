@@ -25,33 +25,27 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentTab: 'BBC',
+            current:0,
             sources: [
-                'BBC', 'REUTERS', 'MEDIUM'
+                'BBC', 'REUTERS','CNN','MEDIUM'
             ],
-            isFetching: true
         };
 
     }
 
-    handleSwitchTag(e, index) {
-        this.setState({currentTab: this.state.sources[index]});
+    handleSwitchTag(e,index) {
+        this.setState({current:index});
     }
 
-    toggleisFetching(fetched) {
-        this.setState({
-            isFetching: !fetched
-        })
-    }
+    
     componentDidMount() {}
     render() {
-        const state = this.state;
-        let {isFetching} = this.state;
+        const {isFetching,sources,current} = this.state;
         const {classes} = this.props;
         return (
             <div>
-                <ScrollableTab sources={state.sources} handleChange={this.handleSwitchTag.bind(this)}/>
-                <MainContainer source={state.currentTab.toLowerCase()}/>
+                <ScrollableTab sources={sources} handleChange={this.handleSwitchTag.bind(this)} current={current}/>
+                <MainContainer source={sources[current].toLowerCase()}/>
             </div>
 
         )

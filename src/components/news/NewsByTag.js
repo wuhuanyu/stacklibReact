@@ -20,14 +20,6 @@ class NewsByTag extends Component {
     }
 
     componentDidMount() {
-        const _this = this;
-        let {source, tag} = this.props;
-        mockClient
-            .getNewsRecent(source, tag, 1, ['_id', 'title', 'image_urls'])
-            .then(data => {
-                console.log('[ListCard] feteched data:' + data);
-                _this.setState({data: data.data})
-            })
     }
 
     render() {
@@ -50,8 +42,7 @@ class NewsByTag extends Component {
                 marginLeft: '5px',
                 marginRight: '5px'
             }}>
-            <Tag tag={tag} tag_img_url={tag_img_url}/>
-                {items}
+                <Tag tag={tag} tag_img_url={tag_img_url}/> {items}
             </div>
 
         );
