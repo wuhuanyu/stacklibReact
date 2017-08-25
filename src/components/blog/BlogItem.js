@@ -41,8 +41,6 @@ class BlogItem extends Component{
 
     render(){
         let {title,crawled_at,img_url,summary,classes}=this.props;
-        console.log(img_url);
-
         return (
             <div>
                 <Card className={classes.card}>
@@ -82,7 +80,7 @@ BlogItem.PropTypes={
     crawled_at:PropTypes.string.isRequrired,
     img_url:PropTypes.string.isRequrired,
     summary:PropTypes.string.isRequrired,
-    classeds:PropTypes.object.isRequrired,
+    classes:PropTypes.object.isRequrired,
 }
 
 
