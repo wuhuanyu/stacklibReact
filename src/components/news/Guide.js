@@ -32,9 +32,10 @@ class Guide extends Component {
     render() {
         const props = this.props;
         const state = this.state;
+        const {source} =props
 
-        let newsbytags = [['Politics','politics.jpg'],['Tech','tech.jpg']].map(([t,url])=>{
-            return (<NewsByTag source={'bbc'} tag={t} tag_img_url={'http://localhost:3001/imgs/'+url}/>);
+        let newsbytags = [['Politics','politics.jpg'],['Tech','tech.jpg']].map(([t,url],idx)=>{
+            return (<NewsByTag source={source} tag={t} tag_img_url={'http://localhost:3001/imgs/'+url} id={idx}/>);
         })
         return (
             <div>
@@ -44,7 +45,6 @@ class Guide extends Component {
                     summary={state.headerData.summary}
                     img={state.headerData && state.headerData.image_urls[0]}/>
                     {newsbytags}
-                {/* <NewsByTag source={'bbc'} tag={'Politics'} ta/> */}
             </div>
         )
     }

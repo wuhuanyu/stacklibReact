@@ -13,7 +13,7 @@ class MainContainer extends Component {
             case 'bbc':
             case 'cnn':
             case 'reuters':
-                return (<Guide source='source' />);
+                return (<Guide source={source} />);
                 break;
             default:
                 return null;
