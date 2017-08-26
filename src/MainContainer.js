@@ -14,13 +14,13 @@ class MainContainer extends Component {
         let content;
         switch (source) {
             case 'bbc':
-                content = <Guide key={source} source={source}/>;
+                content = <Guide  source={source}/>;
                 break;
             case 'cnn':
-                content = <Guide key={source} source={source}/>;
+                content = <Guide  source={source}/>;
                 break;
             case 'reuters':
-                content = <Guide key={source} source={source}/>;
+                content = <Guide  source={source}/>;
                 break;
             default:
                 content = null;
