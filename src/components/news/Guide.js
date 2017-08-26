@@ -6,7 +6,7 @@ import NewsByTag from './NewsByTag';
 import Header from './Header';
 import {mockClient} from '../../repository/client';
 import {NewsTags, NewsListItemFields} from '../../constants/Constants';
-
+import {capitalize} from '../../utility/Utils';
 const cloneDeep = require('clone-deep');
 const tag_img__base = "http://localhost:3001/imgs/";
 class Guide extends Component {
@@ -18,45 +18,24 @@ class Guide extends Component {
         }
     }
     componentWillUnmount() {
-        console.log('----------from guide component will umount');
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps);
         let {source} = nextProps;
-        console.log('----------------- component will receive prop');
-        NewsTags.forEach(tag => mockClient.getNewsRecent(source, tag, 1, NewsListItemFields).then(data => {
-            let newListData = cloneDeep(this.state.listData);
-            newListData[tag] = data.data;
-            this.setState({listData: newListData})
-        }));
-        mockClient
-            .getNewsRecent(source, 'world', 1, NewsListItemFields)
-            .then(data => {
-                console.log('headerData');
-                this.setState({headerData: data.data[0]});
-            })
+        let oldSource = this.props;
+        if (source !== oldSource) {
+            NewsTags.forEach(tag => mockClient.getNewsRecent(source, tag, 1, NewsListItemFields).then(data => {
+                let newListData = cloneDeep(this.state.listData);
+                newListData[tag] = data.data;
+                this.setState({listData: newListData})
+            }));
+            mockClient
+                .getNewsRecent(source, 'world', 1, NewsListItemFields)
+                .then(data => {
+                    this.setState({headerData: data.data[0]});
+                })
+        }
     }
-
-    componentWillUpdate = (nextProps, nextState) => {
-        console.log('--------- componentwillupdate');
-        console.log(nextProps);
-        console.log(nextState);
-        // let {source} = nextProps;
-        // NewsTags.forEach(tag => mockClient.getNewsRecent(source, tag, 1, NewsListItemFields).then(data => {
-        //     let newListData = cloneDeep(this.state.listData);
-        //     newListData[tag] = data.data;
-        //     this.setState({listData: newListData})
-        // }));
-        // mockClient
-        //     .getNewsRecent(source, 'world', 1, NewsListItemFields)
-        //     .then(data => {
-        //         console.log('headerData');
-        //         this.setState({headerData: data.data[0]});
-        //     })
-
-    }
-
 
 
     componentDidMount() {
@@ -69,7 +48,6 @@ class Guide extends Component {
         mockClient
             .getNewsRecent(source, 'world', 1, NewsListItemFields)
             .then(data => {
-                console.log('headerData');
                 this.setState({headerData: data.data[0]});
             })
     }
@@ -77,17 +55,14 @@ class Guide extends Component {
     render() {
         let {listData} = this.state;
         let state = this.state;
-        // console.log(state);
         let {source} = this.props;
         let newsbytags = Object
             .getOwnPropertyNames(listData)
             .map(tag => {
-                // console.log(tag);
                 let dataByTag = listData[tag];
-                // console.log(dataByTag);
                 return (<NewsByTag
                     source={source}
-                    tag={tag}
+                    tag={capitalize(tag)}
                     newss={dataByTag}
                     tag_img_url={tag_img__base + tag + ".jpg"}/>)
             });
@@ -96,8 +71,9 @@ class Guide extends Component {
                 <Header
                     id={state.headerData && state.headerData._id}
                     title={state.headerData && state.headerData.title}
-                    summary={state.headerData.summary || "this is summary"}
-                    img={state.headerData.image_urls && state.headerData.image_urls[0]}/> {newsbytags}
+                    summary={state.headerData.summary}
+                    img={state.headerData.image_urls && state.headerData.image_urls[0]}/> 
+                    {newsbytags}
             </div>
         )
     }

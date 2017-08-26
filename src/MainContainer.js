@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import Guide from './components/news/Guide';
-
+import Blogs from './components/blog/Blogs';
 class MainContainer extends Component {
     constructor(props) {
         super(props);
@@ -22,7 +22,12 @@ class MainContainer extends Component {
             case 'reuters':
                 content = <Guide  source={source}/>;
                 break;
+            case 'medium':
+                content = <Blogs/>;
+                break;
+            
             default:
+
                 content = null;
                 break;
         }

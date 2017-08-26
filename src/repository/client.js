@@ -1,4 +1,4 @@
-import {BBC, CNN, MBook, Reuters} from './data';
+import {BBC, CNN, MBook, Reuters, Medium} from './data';
 const host = "localhost:3001";
 const url = "/api/v1/";
 const defaultDomain = host + url;
@@ -184,5 +184,21 @@ export const mockClient = (() => {
         return addTimeOut(1500, obj, func, [fields]);
     }
 
-    return {getNewsRecent, getNewsById}
+    let getBlogRecent = (source, count = 3, fields) => {
+        let func,
+            obj;
+        switch (source) {
+            case 'medium':
+                func = Medium.getRecent;
+                obj = Medium;
+                break;
+            default:
+                break;
+        }
+
+        return addTimeOut(1500,obj,func,[count,fields]);
+
+    }
+
+    return {getNewsRecent, getNewsById,getBlogRecent}
 })();

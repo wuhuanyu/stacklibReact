@@ -1,5 +1,5 @@
 export const NewsTags=[
-    'politics','china','tech','business','life','travel'
+    'politics','china','tech','business','life',
 ]
 
 

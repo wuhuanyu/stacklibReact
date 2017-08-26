@@ -40,7 +40,7 @@ class BlogItem extends Component{
 
 
     render(){
-        let {title,crawled_at,img_url,summary,classes}=this.props;
+        let {title,crawled_at,img_urls,summary,classes}=this.props;
         return (
             <div>
                 <Card className={classes.card}>
@@ -50,7 +50,7 @@ class BlogItem extends Component{
                     title={title}
                     subheader={crawled_at}
                     />
-                    <CardMedia  className={classes.image} image={img_url}/>
+                    <CardMedia  className={classes.image} image={img_urls&&img_urls[0]}/>
 
                 <CardContent>
                     <Typography component="p">
@@ -78,7 +78,7 @@ class BlogItem extends Component{
 BlogItem.PropTypes={
     title:PropTypes.string.isRequrired,
     crawled_at:PropTypes.string.isRequrired,
-    img_url:PropTypes.string.isRequrired,
+    img_urls:PropTypes.array.isRequrired,
     summary:PropTypes.string.isRequrired,
     classes:PropTypes.object.isRequrired,
 }

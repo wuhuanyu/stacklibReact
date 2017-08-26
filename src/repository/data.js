@@ -6,6 +6,8 @@ export const BBCData = {
         "timestamp": "1501894770",
         "source": "bbc",
         "tag": "politics",
+        "summary": "If you are a tea connoisseur, here's some bad news: your morning cuppa of steami" +
+                        "ng Darjeeling tea may soon be difficult to get.",
         "image_urls": ["https://ichef.bbci.co.uk/news/320/cpsprodpb/13718/production/_97204697_gettyimag" +
                         "es-99392828.jpg"],
         "text": [
@@ -63,6 +65,12 @@ export const BBCData = {
 
 const MediumData = {
         "_id": "59983e5f4da4161e7c6ad446",
+        "summary": "Human reproduction is so fascinating to me. We begin our life as a single, solit" +
+                        "ary cell inside the body of another human being. That cell divides over and over" +
+                        " and over again, building an organism comprised of billions and billions of cell" +
+                        "s whose complexity is simply mind-boggling. Then when it’s time, that cluster of" +
+                        " cells leaves its host to start its own journey.",
+
         "crawled_at": 1503149660000,
         "title": "Jehovah’s Witnesses: A Cult of Isolation and Fear",
         "url": "https://medium.com/@snufflemuffin/jehovahs-witnesses-a-cult-of-isolation-and-fea" +
@@ -364,6 +372,8 @@ export const Medium = {
                 };
                 let data = {};
                 fields.forEach(f => {
+                        console.log('----------from medium');
+                        console.log(f);
                         data[f] = MediumData[f];
                 });
 
@@ -572,7 +582,11 @@ const ReutersData = {
         "title": "Millions of Americans to gaze upon Monday's once-in-a-lifetime eclipse",
         "url": "http://www.reuters.com/article/us-solar-eclipse-usa-idUSKCN1AZ09Q",
         "tag": "tech",
-        "image_urls": [],
+        "image_urls": ["//i2.cdn.cnn.com/cnnnext/dam/assets/170405150356-kim-thumb-1-exlarge-169.jpg"],
+        "summary": "The sight of the moon's shadow passing directly in front of the sun, blotting ou" +
+                        "t all but the halo-like solar corona, may draw the largest live audience for a c" +
+                        "elestial event in human history. When those watching via broadcast and online me" +
+                        "dia are factored into the mix, the spectacle will likely smash records. ",
         "text": [
                 "(Reuters) - Twilight will fall at midday on Monday, stars will glimmer and birds" +
                                 " will roost in an eerie stillness as millions of Americans and visitors witness " +
@@ -645,9 +659,7 @@ export const Reuters = {
         getById(id, fields) {
                 let data = Object.assign({}, ReutersData, {_id: id});
                 let newData = {};
-                fields.forEach(f => 
-                        newData[f] = data[f]
-                )
+                fields.forEach(f => newData[f] = data[f])
                 return {count: 1, data: newData};
 
         },
