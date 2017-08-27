@@ -372,8 +372,6 @@ export const Medium = {
                 };
                 let data = {};
                 fields.forEach(f => {
-                        console.log('----------from medium');
-                        console.log(f);
                         data[f] = MediumData[f];
                 });
 

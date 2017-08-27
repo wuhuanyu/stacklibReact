@@ -12,6 +12,7 @@ import SendIcon from 'material-ui-icons/Send';
 import MailIcon from 'material-ui-icons/Mail';
 import DeleteIcon from 'material-ui-icons/Delete';
 import ReportIcon from 'material-ui-icons/Report';
+import reading from '../repository/books_drawer.jpg';
 
 const styleSheet=theme=>({
     list:{
@@ -34,6 +35,10 @@ class LeftDrawer extends Component{
                     anchor="left"
                     open={props.open}
                     onRequestClose={props.onRequestClose}>
+                    <div style={{width:250}}>
+                        <img src={reading} style={{width:"100%",height:'auto'}}/>
+
+                    </div>
                     <div>
                         <List disablePadding className={classes.list}>
                             <div>

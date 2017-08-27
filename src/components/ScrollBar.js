@@ -21,7 +21,6 @@ import ReportIcon from 'material-ui-icons/Report';
 const styleSheet =theme=>({
     appbar:{
         width:'100%',
-        // position:'fixed',
         marginTop:0,
         backgroundColor:theme.palette.background.paper,
         flexDirection:'row',
