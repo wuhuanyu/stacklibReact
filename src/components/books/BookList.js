@@ -21,8 +21,8 @@ class BookList extends Component {
     }
 
     render() {
-        let {datas} = this.state;
-        let bookItems = datas.map(book => {
+        let {bookData} = this.state;
+        let bookItems = bookData.map(book => {
             let {_id, crawled_at, title, image_urls, summary} = book;
             return (
                 <div><BookItem
