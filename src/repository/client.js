@@ -196,9 +196,14 @@ export const mockClient = (() => {
                 break;
         }
 
-        return addTimeOut(1500,obj,func,[count,fields]);
+        return addTimeOut(1500, obj, func, [count, fields]);
 
     }
 
-    return {getNewsRecent, getNewsById,getBlogRecent}
+    let getBookRecent = function (count = 3, fields) {
+        return addTimeOut(1500,MBook,MBook.getRecent,[count,fields]);
+
+    }
+
+    return {getNewsRecent, getNewsById, getBlogRecent,getBookRecent}
 })();

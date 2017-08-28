@@ -561,7 +561,6 @@ const MBookData = {
 
 export const MBook = {
         getRecent(count = 5, fields) {
-                // let data=Object.assign({},MBookData);
                 let data = {};
                 fields.forEach(f => data[f] = MBookData[f]);
                 let datas = {
