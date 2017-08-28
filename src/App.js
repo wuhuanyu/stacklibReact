@@ -1,16 +1,16 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import ScrollableTab from './components/ScrollBar'
 import MockRep from './repository/MockRep';
 import Header from './components/CommonItems';
 import pic from './repository/mockPic.jpg';
-import {NewsList} from "./components/CommonItems"
-import {CircularProgress} from 'material-ui/Progress';
+import { NewsList } from "./components/CommonItems"
+import { CircularProgress } from 'material-ui/Progress';
 import BlogItem from './components/blog/BlogItem';
 import MainContainer from './MainContainer';
 
-import {withStyles} from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 
 const styles = theme => ({
     progress: {
@@ -25,27 +25,27 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            current:0,
+            current: 0,
             sources: [
-               'MEDIUM','MBOOK','BBC', 'REUTERS','CNN',
+                'MBOOK', 'MEDIUM', 'BBC', 'REUTERS', 'CNN',
             ],
         };
 
     }
 
-    handleSwitchTag(e,index) {
-        this.setState({current:index});
+    handleSwitchTag(e, index) {
+        this.setState({ current: index });
         this.forceUpdate();
     }
 
-    
-    componentDidMount() {}
+
+    componentDidMount() { }
     render() {
-        let {isFetching,sources,current} = this.state;
+        let { isFetching, sources, current } = this.state;
         return (
             <div>
-                <ScrollableTab sources={sources} handleChange={this.handleSwitchTag.bind(this)} current={current}/>
-                <MainContainer source={sources[current].toLowerCase()}/>
+                <ScrollableTab sources={sources} handleChange={this.handleSwitchTag.bind(this)} current={current} />
+                <MainContainer source={sources[current].toLowerCase()} />
             </div>
 
         )

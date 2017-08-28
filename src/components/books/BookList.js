@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import List from 'material-ui/List';
 import Divider from 'material-ui/Divider';
-import {mockClient} from '../../repository/client';
+import { mockClient } from '../../repository/client';
 import BookItem from './BookItem';
 
 class BookList extends Component {
@@ -16,28 +16,32 @@ class BookList extends Component {
         mockClient
             .getBookRecent(3, ['_id', 'crawled_at', 'title', 'image_urls', 'summary'])
             .then(res => {
-                this.setState({bookData: res.data})
+                this.setState({ bookData: res.data })
             })
     }
 
     render() {
-        let {bookData} = this.state;
-        let bookItems = bookData.map(book => {
-            let {_id, crawled_at, title, image_urls, summary} = book;
+        let { bookData } = this.state;
+        let bookItems = bookData.map((book,idx) => {
+            let { _id, crawled_at, title, image_urls, summary } = book;
             return (
-                <div><BookItem
-                    key={_id}
+                <BookItem
+                    key={_id+idx}
                     crawled_at={crawled_at}
                     title={title}
                     img_url={image_urls}
-                    summary={summary}/>
-                    < Divider/></div>
+                    summary={summary} />
+
             );
         });
-        return <List>
-            {bookItems}
-        </List>
 
+        console.log(bookItems.length);
+        
+        return (
+            <List>
+                {bookItems}
+            </List>
+        )
     }
 }
 
