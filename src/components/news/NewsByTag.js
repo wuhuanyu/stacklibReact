@@ -18,7 +18,7 @@ class NewsByTag extends Component {
 
     render() {
         let {newss,classes,tag_img_url,tag}=this.props;
-        let items = newss.map(d =>< NewsListItem title = {
+        let items = newss.map((d,idx) =>< NewsListItem key={d._id+idx} title = {
             d.title
         }
         img = {

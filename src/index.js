@@ -5,30 +5,29 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import * as client from './repository/client'
 import 'typeface-roboto';
+import {BrowserRouter as Router} from 'react-router-dom';
 // import Slider from './components/slider/Slider';
-
 
 const IMAGE_DATA = [
   {
     src: require('./components/slider/images/demo1.jpg'),
-    alt: 'images-1',
-  },
-  {
+    alt: 'images-1'
+  }, {
     src: require('./components/slider/images/demo2.jpg'),
-    alt: 'images-2',
-  },
-  {
+    alt: 'images-2'
+  }, {
     src: require('./components/slider/images/demo3.jpg'),
-    alt: 'images-3',
-  },
+    alt: 'images-3'
+  }
 ];
 
-const AppTest = function(props){
+const AppTest = function (props) {
   return (
     <div>this is app test</div>
   )
 };
 render(
-  <App/>
-    , document.getElementById('root'));
+  <Router>
+
+  <App/></Router>, document.getElementById('root'));
 registerServiceWorker();

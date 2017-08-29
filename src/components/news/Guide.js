@@ -61,6 +61,7 @@ class Guide extends Component {
             .map(tag => {
                 let dataByTag = listData[tag];
                 return (<NewsByTag
+                key={tag}
                     source={source}
                     tag={capitalize(tag)}
                     newss={dataByTag}

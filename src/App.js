@@ -9,6 +9,7 @@ import { NewsList } from "./components/CommonItems"
 import { CircularProgress } from 'material-ui/Progress';
 import BlogItem from './components/blog/BlogItem';
 import MainContainer from './MainContainer';
+import {BrowserRouter as Router} from 'react-router-dom';
 
 import { withStyles } from 'material-ui/styles';
 

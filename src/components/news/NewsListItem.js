@@ -6,9 +6,12 @@ import Typography from 'material-ui/Typography';
 import {ListItem} from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import Card,{CardContent,CardMedia} from 'material-ui/Card';
+import {withLink} from '../withLink';
+import {Link} from 'react-router-dom'
 const NewsListItem = (props) => {
     let {title,img}= props;
     return (
+        // <Link to={'/'}>
         <div >
             <ListItem
                 style={{
@@ -65,5 +68,7 @@ NewsListItem.PropTypes = {
     time:PropTypes.string.isRequired,
 }
 
+NewsListItem.to="/";
 
-export default NewsListItem;
+
+export default withLink(NewsListItem);
