@@ -10,7 +10,7 @@ import { CircularProgress } from 'material-ui/Progress';
 import BlogItem from './components/blog/BlogItem';
 import MainContainer from './MainContainer';
 import {BrowserRouter as Router} from 'react-router-dom';
-
+import NewsArticleContainer from './components/news/NewsArticleContainer';
 import { withStyles } from 'material-ui/styles';
 
 const styles = theme => ({
@@ -46,7 +46,8 @@ class App extends Component {
         return (
             <div>
                 <ScrollableTab sources={sources} handleChange={this.handleSwitchTag.bind(this)} current={current} />
-                <MainContainer source={sources[current].toLowerCase()} />
+                <NewsArticleContainer source={'bbc'} tag={'world'} _id={'id'}/>
+                {/* <MainContainer source={sources[current].toLowerCase()} /> */}
             </div>
 
         )

@@ -162,7 +162,7 @@ export const mockClient = (() => {
         return addTimeOut(1500, obj, func, [tag, count, fields])
     }
 
-    let getNewsById = (source, fields) => {
+    let getNewsById = (source,id, fields) => {
         let func,
             obj
         switch (source) {
@@ -181,7 +181,7 @@ export const mockClient = (() => {
             default:
                 break;
         }
-        return addTimeOut(1500, obj, func, [fields]);
+        return addTimeOut(1500, obj, func, [id,fields]);
     }
 
     let getBlogRecent = (source, count = 3, fields) => {

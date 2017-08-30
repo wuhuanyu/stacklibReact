@@ -3,7 +3,9 @@ import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 export function withLink(WrapedComponent) {
     return class extends Component {
-        static PropTypes = WrapedComponent.PropTypes;
+        static get PropTypes() {
+            return WrapedComponent.PropTypes;
+        }
         render() {
             return (
                 <Link

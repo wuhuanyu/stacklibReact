@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import {mockClient} from '../../repository/client';
 import {AllNewsFields} from '../../constants/Constants';
 import Article from './Article';
+import {num2Time} from '../../utility/Utils';
+
 class NewsArticleContainer extends Component {
     constructor(props) {
         super(props);
@@ -15,6 +17,10 @@ class NewsArticleContainer extends Component {
         mockClient
             .getNewsById(source, _id, AllNewsFields)
             .then(res => {
+                console.log(res);
+                if(res.data.timestamp){
+                    res.data.timestamp=num2Time(res.data.timestamp);
+                }
                 this.setState({data: res.data})
             })
     };
@@ -27,7 +33,7 @@ class NewsArticleContainer extends Component {
     };
 
     componentDidMount = () => {
-        fetchData(this.props.source, this.props._id);
+       this.fetchData(this.props.source, this.props._id);
     }
 
     render() {
