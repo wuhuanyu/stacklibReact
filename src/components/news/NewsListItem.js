@@ -71,4 +71,4 @@ NewsListItem.PropTypes = {
 NewsListItem.to="/";
 
 
-export default withLink(NewsListItem);
+export default NewsListItem;

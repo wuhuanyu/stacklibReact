@@ -11,18 +11,19 @@ import IconButton from 'material-ui/IconButton';
 import ToolBar from 'material-ui/Toolbar';
 const CSS = {
     root: {
-        width: '100%'
+        width: '100%',
+        display:'block'
     },
 
     content: {
         display: 'flex',
-        alignItems: 'center',
+        alignItems: 'center'
     },
     source: {
-        display: 'inline-block',
+        display: 'inline-block'
     },
     tag: {
-        display: 'inline-block',
+        display: 'inline-block'
     }
 
 }
@@ -33,15 +34,22 @@ class NavBar extends Component {
         this.state = {
             sMenu: false,
             tMenu: false,
-            sources: [
-                'BBC', 'REUTERS', 'CNN'
-            ],
-            tags: [
-                'LIFE', 'CHINA', 'POLITICS'
-            ],
-            cS: 0,
-            cT: 0
+            sAnchor: undefined,
+            tAnchor: undefined
         }
+    }
+
+    componentDidMount = () => {
+        this.setState({
+            sAnchor: findDOMNode(this.sMenuB),
+            tAnchor: findDOMNode(this.tMenuB)
+        })
+    }
+
+    componentDidUpdate() {
+
+        // this.setState({             sAnchor:findDOMNode(this.sMenuB),
+        // tAnchor:findDOMNode(this.tMenuB),         })
     }
 
     onSourceClick() {
@@ -58,17 +66,25 @@ class NavBar extends Component {
     onTMenuClose() {
         this.setState({tMenu: false})
     }
-    onSMenuItemClick(e, idx) {
-        this.setState({cS: idx})
+
+    onSourceItemClick(event, idx) {
+        this
+            .props
+            .handleSourceItemClick(event, idx);
+        this.onSMenuClose();
     }
-    onTMenuItemClick(e, idx) {
-        this.setState({cT: idx})
+    onTagItemClick(event, idx) {
+        this
+            .props
+            .handleTagItemClick(event, idx);
+        this.onTMenuClose();
     }
+
     render() {
-        let {classes} = this.props;
+        let {classes, sources, tags, cTIdx, cSIdx} = this.props;
         return (
             <div className={classes.root}>
-                <AppBar color="default">
+                <AppBar color="default" position="static">
                     <div className={classes.content}>
                         <IconButton>
                             <Book/>
@@ -77,55 +93,60 @@ class NavBar extends Component {
                             onClick={this
                             .onSourceClick
                             .bind(this)}
-                            ref={node=>this.sMenuB=node}
+                            ref={node => this.sMenuB = node}
                             className={classes.source}Button >
-                            {this.state.sources[this.state.cS]}
+                            {sources[cSIdx]}
                         </Button>
+
                         <Button
                             onClick={this
                             .onTagClick
                             .bind(this)}
-                            ref={node=>this.tMenuB=node}
+                            ref={node => this.tMenuB = node}
                             className={classes.tag}>
-                            {this.state.tags[this.state.cT]}
+                            {tags[cTIdx]}
                         </Button>
 
                     </div>
+
                     <Menu
                         open={this.state.sMenu}
-                        anchorEl={findDOMNode(this.sMenuB)}
+                        anchorEl={this.state.sAnchor}
+                        anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'center'
+                    }}
+                        transformOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center'
+                    }}
                         onRequestClose={this
                         .onSMenuClose
                         .bind(this)}>
-                        {this
-                            .state
-                            .sources
-                            .map((s, idx) => (
-                                <MenuItem
-                                    key={s}
-                                    selected={idx === this.state.cS}
-                                    onClick={event => this.onSMenuItemClick(event, idx)}>
-                                    {s}
-                                </MenuItem >
-                            ))}
+                        {sources.map((s, idx) => (
+                            <MenuItem
+                                key={s}
+                                selected={idx === cSIdx}
+                                onClick={event => this.onSourceItemClick(event, idx)}>
+                                {s}
+                            </MenuItem >
+                        ))}
                     </Menu>
+
                     <Menu
                         open={this.state.tMenu}
-                        anchorEl={findDOMNode(this.tMenuB)}
+                        anchorEl={this.state.tAnchor}
                         onRequestClose={this
                         .onTMenuClose
                         .bind(this)}>
-                        {this
-                            .state
-                            .tags
-                            .map((t, idx) => (
-                                <MenuItem
-                                    key={t}
-                                    selected={idx === this.state.cT}
-                                    onClick={event => this.onTMenuItemClick(event, idx)}>
-                                    {t}
-                                </MenuItem >
-                            ))}
+                        {tags.map((t, idx) => (
+                            <MenuItem
+                                key={t}
+                                selected={idx === cTIdx}
+                                onClick={event => this.onTagItemClick(event, idx)}>
+                                {t}
+                            </MenuItem >
+                        ))}
                     </Menu>
                 </AppBar>
             </div>
@@ -133,8 +154,12 @@ class NavBar extends Component {
     }
 }
 NavBar.PropTypes = {
-    category: PropTypes.oneOf(['news', 'blog', 'book'])
+    sources: PropTypes.array.isRequired,
+    tags: PropTypes.array.isRequired,
+    cSIdx: PropTypes.number.isRequired,
+    cTIdx: PropTypes.number.isRequired,
+    handleSourceItemClick: PropTypes.func.isRequired,
+    handleTagItemClick: PropTypes.func.isRequired
 }
-
 
 export default withStyles(CSS)(NavBar);

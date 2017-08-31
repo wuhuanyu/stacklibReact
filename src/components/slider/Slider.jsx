@@ -20,8 +20,8 @@ class Slider extends Component {
     }
 
     componentDidMount() {
-        let { interval } = this.props;
-        let _this = this;
+        // let { interval } = this.props;
+        // let _this = this;
         this.autoPlay();
     }
 
@@ -40,9 +40,7 @@ class Slider extends Component {
 
 
     componentWillUmount() {
-        // this
-        //     .flipper
-        //     .clear();
+  
     }
 
     render() {

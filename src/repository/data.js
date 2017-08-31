@@ -343,6 +343,7 @@ export const BBC = {
 
         getByTag: (tag, count = 5, fields) => {
                 let data = Object.assign({}, BBCData);
+                data.tag=tag;   
                 let newData = {};
                 fields.forEach(f => {
                         newData[f] = data[f];
@@ -525,6 +526,7 @@ export const CNN = {
 
         getByTag(tag, count = 5, fields) {
                 let data = Object.assign({}, CNNData);
+                data.tag=tag;
                 let newData = {};
                 fields.forEach(f => {
                         newData[f] = data[f];
@@ -579,6 +581,7 @@ const ReutersData = {
         "title": "Millions of Americans to gaze upon Monday's once-in-a-lifetime eclipse",
         "url": "http://www.reuters.com/article/us-solar-eclipse-usa-idUSKCN1AZ09Q",
         "tag": "tech",
+        "source": "reuters",
         "image_urls": ["//i2.cdn.cnn.com/cnnnext/dam/assets/170405150356-kim-thumb-1-exlarge-169.jpg"],
         "summary": "The sight of the moon's shadow passing directly in front of the sun, blotting ou" +
                         "t all but the halo-like solar corona, may draw the largest live audience for a c" +
@@ -663,6 +666,7 @@ export const Reuters = {
 
         getByTag(tag, count = 5, fields) {
                 let data = Object.assign({}, ReutersData);
+                data.tag=tag;
                 let newData = {};
                 fields.forEach(f => {
                         newData[f] = data[f];

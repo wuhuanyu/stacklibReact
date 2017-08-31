@@ -7,13 +7,23 @@ import * as client from './repository/client'
 import 'typeface-roboto';
 import {BrowserRouter as Router} from 'react-router-dom';
 import TaggedNewsContainer from './components/news/TaggedNewssContainer';
-
-// const IMAGE_DATA = [   {     src:
-// require('./components/slider/images/demo1.jpg'),     alt: 'images-1'   }, {
-//   src: require('./components/slider/images/demo2.jpg'),     alt: 'images-2'
-// }, {     src: require('./components/slider/images/demo3.jpg'),     alt:
-// 'images-3'   } ];
+import Slider from './components/slider/Slider';
+const IMAGE_DATA = [
+  {
+    src: require('./components/slider/images/demo1.jpg'),
+    alt: 'images-1'
+  }, {
+    src: require('./components/slider/images/demo2.jpg'),
+    alt: 'images-2'
+  }, {
+    src: require('./components/slider/images/demo3.jpg'),
+    alt: 'images-3'
+  }
+];
 
 render(
-  <TaggedNewsContainer/>, document.getElementById('root'));
+  <TaggedNewsContainer/>,
+  // <Slider items={IMAGE_DATA} auto={true} interval={}/>
+
+  document.getElementById('root'));
 registerServiceWorker();
