@@ -332,7 +332,7 @@ const MediumData = {
 
 export const BBC = {
         getById: (id, fields) => {
-                let data = Object.assign({}, BBCData, {_id: id});
+                let data = Object.assign({}, BBCData);
                 let newData = {};
                 fields.forEach(f => {
                         newData[f] = data[f];

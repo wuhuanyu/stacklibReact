@@ -7,73 +7,168 @@ import Avatar from 'material-ui/Avatar';
 import red from 'material-ui/colors/red';
 import FavoriteIcon from 'material-ui-icons/Favorite';
 import ShareIcon from 'material-ui-icons/Share';
-import Typography from 'material-ui/Typography';
-import IconButton from 'material-ui/IconButton';
 import Chip from 'material-ui/Chip';
 import Spider from '../../repository/spider.png';
 import Schedule from 'material-ui-icons/Schedule';
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import Typography from 'material-ui/Typography';
+import Button from 'material-ui/Button';
+import IconButton from 'material-ui/IconButton';
+import MenuIcon from 'material-ui-icons/Menu';
+import {mockClient} from '../../repository/client';
+import {AllNewsFields} from '../../constants/Constants';
+import {num2Time} from '../../utility/Utils';
 const CSS = theme => ({
     root: {
         marginTop: '5px',
         marginLeft: '2px',
-        marginRight:'2px',
-        position:'relative',
-        height:'100%',
+        marginRight: '2px',
+        position: 'relative',
+        height: '100%'
     },
     title: {
-        marginTop:'3px',
-        marginLeft:'3px',
+        marginTop: '3px',
+        marginLeft: '3px'
     },
     imgContainer: {
-        
     },
     img: {
-        width:'100%',
-        height:'auto',
+        width: '100%',
+        height: 'auto',
+        borderRadius:'5px'
     }
 })
 
 const Text = ({t}) => (
-    <Typography paragraph style={{marginLeft:'3px',marginRight:'3px'}}>{t}</Typography>
+    <Typography
+        paragraph
+        style={{
+        marginLeft: '3px',
+        marginRight: '3px'
+    }}>{t}</Typography>
 )
-const Article = ({article, source, tag, classes}) => {
-    let texts = null;
-    if (article.text) {
-        texts = article
-            .text
-            .map((t, idx) => {
-                return <Text key={idx + article._id} t={t}/>
+
+class Article extends Component {
+    constructor(props) {
+        super(props);
+        this.state={
+            data:{}
+        }
+    }
+
+    componentDidMount = () => {
+        mockClient
+            .getNewsById('bbc', '313', AllNewsFields)
+            .then(res => {
+                this.setState({data: res.data})
+                console.log(res);
             })
     }
-    return (
-        <Paper elevation={2} className={classes.root}>
-            
-            {/* <CardActions disableActionSpacing>
-                <IconButton aria-label="Like">
-                    <FavoriteIcon/>
-                </IconButton>
-                <IconButton aria-label="Share">
-                    <ShareIcon/>
-                </IconButton>
-            </CardActions> */}
 
-            <Typography type="headline" component="h3" gutterBottom className={classes.title}>
-                {article.title}
-            </Typography>
-            <Typography style={{float:'right'}} type="caption" gutterBottom>
-                {article.timestamp}
-            </Typography>
-            
-            <Typography type="subheading" gutterBottom style={{clear:'right'}}>
-                {"Summary: "+article.summary}
-            </Typography>
-            <div className={classes.imgContainer}>
-                <img src={article.image_urls && article.image_urls[0]} className={classes.img}/>
+    render() {
+        let {source, tag, classes} = this.props;
+        let {
+            title,
+            text,
+            image_urls,
+            timestamp,
+            url,
+            summary,
+            _id,
+        } = this.state.data;
+
+        let texts = null;
+        if (text) {
+            texts = 
+                text
+                .map((t, idx) => {
+                    return <Text key={idx +_id} t={t}/>
+                })
+        }
+        return (
+            <div>
+                <AppBar
+                    position="static"
+                    color="default"
+                    style={{
+                    width: '100%',display:'flex',alignContent:'center'
+                }}>
+                    <Toolbar disableGutters>
+                        <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
+                            <MenuIcon/>
+                        </IconButton>
+                        <Typography type="title" color="inherit" className={classes.flex} style={{flex:1}}>
+                            {"News"}
+                        </Typography>
+                        <IconButton>
+                            <ShareIcon/>
+                        </IconButton>
+                    </Toolbar>
+                </AppBar>
+                <Paper elevation={2} className={classes.root}>
+                    <Typography
+                        type="headline"
+                        component="h3"
+                        gutterBottom
+                        className={classes.title}>
+                        {title}
+                    </Typography>
+                    <Typography
+                        style={{
+                        float: 'right'
+                    }}
+                        type="caption"
+                        gutterBottom>
+                        {num2Time(timestamp)}
+                    </Typography>
+
+                    <Typography
+                        style={{marginRight:'3px',marginLeft:'3px'}}
+                        type="subheading"
+                        gutterBottom
+                        style={{
+                        clear: 'right'
+                    }}>
+                        {"Summary: " + summary}
+                    </Typography>
+                    <div className={classes.imgContainer}>
+                        <img src={image_urls && image_urls[0]} className={classes.img}/>
+                    </div>
+                    {texts}
+                </Paper>
             </div>
-            {texts}
-        </Paper>
-    )
+        );
+    }
+
 }
+
+// const Article = ({article, source, tag, classes}) => {     let texts = null;
+//    if (article.text) {         texts = article             .text
+// .map((t, idx) => {                 return <Text key={idx + article._id}
+// t={t}/>             })     }     return (         <div>             <AppBar
+// position="static" style={{                 width: '100%'             }}>
+//            <Toolbar disableGutters>                     <IconButton
+// className={classes.menuButton} color="contrast" aria-label="Menu">
+//              <MenuIcon/>                     </IconButton>
+//  <Typography type="title" color="inherit" className={classes.flex}>
+//               {"News"}                     </Typography>
+// <Button color="contrast">Share</Button>                 </Toolbar>
+//  </AppBar>             <Paper elevation={2} className={classes.root}>
+//         <Typography                     type="headline"
+// component="h3"                     gutterBottom
+// className={classes.title}>                     {article.title}
+//  </Typography>                 <Typography                     style={{
+//               float: 'right'                 }}
+// type="caption"                     gutterBottom>
+// {article.timestamp}                 </Typography>                 <Typography
+//                     type="subheading"                     gutterBottom
+//              style={{                     clear: 'right'                 }}>
+//                    {"Summary: " + article.summary}
+// </Typography>                 <div className={classes.imgContainer}>
+//            <img src={article.image_urls && article.image_urls[0]}
+// className={classes.img}/>                 </div>                 {texts}
+//        </Paper>         </div>     ) }
 
 Article.PropTypes = {
     source: PropTypes.string.isRequired,
@@ -87,7 +182,7 @@ Article.PropTypes = {
         image_urls: PropTypes.array.isRequired,
         text: PropTypes.array.isRequired,
         url: PropTypes.string.isRequired,
-        tag:PropTypes.string.isRequired,
+        tag: PropTypes.string.isRequired
     })
 }
 
