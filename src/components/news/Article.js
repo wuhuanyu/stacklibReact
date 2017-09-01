@@ -19,10 +19,9 @@ import MenuIcon from 'material-ui-icons/Menu';
 import {mockClient} from '../../repository/client';
 import {AllNewsFields} from '../../constants/Constants';
 import {num2Time} from '../../utility/Utils';
-import Chip from 'materia'
 const CSS = theme => ({
     root: {
-        marginTop: '5px',
+        marginTop: '2px',
         position: 'relative',
         height: '100%'
     },
@@ -77,7 +76,7 @@ class Article extends Component {
             timestamp,
             url,
             summary,
-            _id
+            _id,
         } = this.state.data;
 
         let texts = null;
@@ -122,6 +121,7 @@ class Article extends Component {
                         className={classes.title}>
                         {title}
                     </Typography>
+
                     <div
                         style={{
                         display: 'flex',
@@ -135,6 +135,8 @@ class Article extends Component {
                             gutterBottom>
                             {num2Time(timestamp)}
                         </Typography>
+
+                        <Chip label={tag} style={{marginRight:'5px'}}/>
                     </div>
 
                     <Typography

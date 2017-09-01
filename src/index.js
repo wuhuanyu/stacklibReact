@@ -24,8 +24,7 @@ const IMAGE_DATA = [
 ];
 
 render(
-  <Article source={"bbc"} tag="tech"/>,
-// <TaggedNewsContainer/>, <Slider items={IMAGE_DATA} auto={true} interval={}/>
-
+  <Article tag={"China"} source={"bbc"}/>,
+/* <App/>, */
 document.getElementById('root'));
 registerServiceWorker();

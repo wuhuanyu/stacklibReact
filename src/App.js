@@ -46,8 +46,8 @@ class App extends Component {
         return (
             <div>
                 <ScrollableTab sources={sources} handleChange={this.handleSwitchTag.bind(this)} current={current} />
-                <NewsArticleContainer source={'bbc'} tag={'world'} _id={'id'}/>
-                {/* <MainContainer source={sources[current].toLowerCase()} /> */}
+                {/* <NewsArticleContainer source={'bbc'} tag={'world'} _id={'id'}/> */}
+                <MainContainer source={sources[current].toLowerCase()} />
             </div>
 
         )
