@@ -10,6 +10,7 @@ import TaggedNewsContainer from './components/news/TaggedNewssContainer';
 import Slider from './components/slider/Slider';
 import Article from './components/news/Article';
 import {mockClient} from './repository/client'
+import Beauties from './components/others/Beauty';
 const IMAGE_DATA = [
   {
     src: require('./components/slider/images/demo1.jpg'),
@@ -24,7 +25,7 @@ const IMAGE_DATA = [
 ];
 
 render(
-  <Article tag={"China"} source={"bbc"}/>,
+  <Beauties/>,
 /* <App/>, */
 document.getElementById('root'));
 registerServiceWorker();
