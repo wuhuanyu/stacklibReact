@@ -1,57 +1,92 @@
-window.cache = (function () {
-    let pushIntoCache = function (source, obj) {
-        if(checkExists(source,obj._id)){
-          let index =  source.data.findIndex(x=>x._id===obj._id);
-          let item = source.data.filter(x=>x._id===obj._id);
-          item = Object.assign(item,Object.assign({},obj));
-          source.data[index] = item;
-        }
-        else{
-            source.data.push(Object.assign({},obj));
-        }
+const cache = {
+    medim: {
+        recent: [],
+        data: []
+    },
+    bbc: {
+        header: 0,
+        recent: {
+            politics: [],
+            china: [],
+            life: [],
+            tech: [],
+            business: []
+        },
+        data: []
+    },
+    cnn: {
+        header: 0,
+        recent: {
+            politics: [],
+            china: [],
+            life: [],
+            tech: [],
+            business: []
+        },
+        data: []
+    },
+    reuters: {
+        header: 0,
+        recent: {
+            politics: [],
+            china: [],
+            life: [],
+            tech: [],
+            business: []
+        },
+        data: []
+    },
+    mbook: {
+        recent: {},
+        data: []
     }
+};
 
-    let checkExists = function(source,id){
-        let exists = false;
-        source.data.forEach(e=>{
-            if(e._id===id){
-                exists=true;
+const pushCacheData = function (source, obj) {
+    if (checkExists(source, obj._id)) {
+        let index = cache[source]
+            .data
+            .findIndex(x => x._id === obj._id);
+        let item = cache[source]
+            .data
+            .filter(x => x._id === obj._id);
+        item = Object.assign(item, Object.assign({}, obj));
+        cache[source].data[index] = item;
+    } else {
+        cache[source]
+            .data
+            .push(Object.assign({}, obj));
+    }
+}
+
+const checkExists = function (source, id) {
+    let exists = false;
+    cache[source]
+        .data
+        .forEach(e => {
+            if (e._id === id) {
+                exists = true;
             }
         });
-        return exists;
-    }
+    return exists;
+}
 
-    let manupilate = function(source,action,domain,id){
-        
-    }
+const pushNewsRecent = (source, tag, _id) => {
+    console.log("pushNewsRecent")
+    let recent = cache[source].recent[tag];
+    if(!recent.includes(_id))
+        recent.push(_id);
+}
 
-    let cache = {
-        medim: {
-            recent: [],
-            data: []
-        },
-        bbc: {
-            header: [],
-            recent: {},
-            data: []
-        },
-        cnn: {
-            header: [],
-            recent: {},
-            data: []
-        },
-        reuters: {
-            header: [],
-            recent: {},
-            data: []
-        },
-        mbook: {
-            recent: {},
-            data: []
-        }
+const pushOtherRecent=(source,_id)=>{
+    console.log("pushNewsRecent");
+    let recent = cache[source].recent;
+    if(!recent.includes(_id))
+        recent.push(_id);
+}
 
-    }
 
-    return {cache,pushIntoCache,checkExists}
+const getRecentNewsCache=(source,tag,)=>{
+    
+}
 
-})();
