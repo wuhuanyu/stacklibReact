@@ -26,7 +26,7 @@ const IMAGE_DATA = [
 ];
 
 render(
-  <Feedback categories={["UI","UI1"]}/>
+  <Feedback categories={["UI","资源","stack长得帅"]}/>
   ,
 document.getElementById('root'));
 registerServiceWorker();
