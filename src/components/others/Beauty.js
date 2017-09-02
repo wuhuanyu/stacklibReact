@@ -7,21 +7,22 @@ import IconButton  from 'material-ui/IconButton';
 import MenuIcon from 'material-ui-icons/Menu';
 import Typography from 'material-ui/Typography';
 import Button  from 'material-ui/Button';
+import withAppBar from './withAppBar';
 
 const api = "http://gank.io/api/data/%E7%A6%8F%E5%88%A9/5/1";
 
-const BeautyItem = ({url}) => {
-    return (
-        <Card>
-            <img
-                src={url}
-                style={{
-                width: '100%',
-                height: 'auto'
-            }}/> 
-        </Card>
-    )
-}
+// const BeautyItem = ({url}) => {
+//     return (
+//         <Card>
+//             <img
+//                 src={url}
+//                 style={{
+//                 width: '100%',
+//                 height: 'auto'
+//             }}/> 
+//         </Card>
+//     )
+// }
 
 class Beauties extends Component {
     constructor(props) {
@@ -53,28 +54,11 @@ class Beauties extends Component {
     render() {
         let {urls} = this.state;
         return (
-            <div>
-                <AppBar position="static" style={{width:'100%'}} color="default">
-                    <Toolbar disableGutters>
-                        <IconButton color="default" aria-label="Menu">
-                            <MenuIcon/>
-                        </IconButton>
-                        <Typography type="title" color="default">
-                             {"福利"}
-                        </Typography>
-                    </Toolbar>
-                </AppBar>
                 <div style={{marginTop:'3px'}}>
-                {urls.map(url =>< BeautyItem key = {
-                    url
-                }
-                url = {
-                    url
-                } />)}
+                {urls.map(url =>< img key = {url} src = {url} style={{width:'100%',height:'auto'}}/>)}
                 </div>
-            </div>
         )
     }
 }
 
-export default Beauties;
+export default withAppBar(Beauties,"福利");
