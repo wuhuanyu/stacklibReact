@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import findDOMNode from 'react-dom';
+import {findDOMNode} from 'react-dom';
 import PropTypes from 'prop-types';
 import Typography from 'material-ui/Typography';
 import TextField from 'material-ui/TextField';
@@ -32,7 +32,7 @@ class Feedback extends Component {
     }
     onCategoryClick() {
         this.setState({
-            
+
         })
     }
     render() {
@@ -54,15 +54,20 @@ class Feedback extends Component {
                             onClick={this
                             .onCategoryClick
                             .bind(this)}>{"tucao"}</Button>
-                        <Menu open={this.state.open} anchorEl={this.state.el} onRequestClose={}>
+                        <Menu open={this.state.open} anchorEl={this.state.el} onRequestClose={this.onCategoryClick.bind(this)}>
 
                         </Menu>
-                        <TextField id={"category"} label={""}/>
+                        <TextField id={"category"} label={"Text"}/>
                     </form>
                 </Paper>
             </div>
         )
     }
 }
+
+Feedback.PropTypes={
+    
+}
+
 
 export default withAppBar(Feedback, "吐槽");

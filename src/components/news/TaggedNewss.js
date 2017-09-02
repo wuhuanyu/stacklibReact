@@ -25,7 +25,7 @@ const TaggedCommonNewss = ({source, newss, tag}) => {
                 source={source}
                 tag={tag}
                 newss={newss}
-                tag_img_url={"http://192.168.1.103:3001/imgs/"+tag+".jpg"}/>
+                tag_img_url={"http://localhost:3001/imgs/"+tag+".jpg"}/>
 
         </div>
     )
