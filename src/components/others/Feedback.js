@@ -41,6 +41,7 @@ class Feedback extends Component {
     }
     onCategoryClick() {
         this.setState({
+            open:true,
         })
     }
 
@@ -72,11 +73,13 @@ class Feedback extends Component {
                             ref={node => this.categoryAnchor = node}
                             onClick={this
                                 .onCategoryClick
-                                .bind(this)}>{"tucao"}</Button>
+                                .bind(this)}>{this.props.categories[this.state.cT]}</Button>
                         <Menu open={this.state.open} anchorEl={this.state.el} onRequestClose={this.closeMenu.bind(this)}>
                             {
                                 this.props.categories.map((cat, idx) => {
-                                    return <MenuItem key={cat} selected={idx === this.state.cT} onClick={event => this.onCategoryItemClick(idx)} />
+                                    return <MenuItem key={cat} selected={idx === this.state.cT} onClick={event => this.onCategoryItemClick(idx)}>
+                                    {cat}
+                                    </MenuItem>
                                 })
                             }
                         </Menu>
