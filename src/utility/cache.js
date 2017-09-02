@@ -1,92 +1,119 @@
-const cache = {
-    medim: {
-        recent: [],
-        data: []
-    },
-    bbc: {
-        header: 0,
-        recent: {
-            politics: [],
-            china: [],
-            life: [],
-            tech: [],
-            business: []
+window.cacheClient=(()=>{
+    const cache = {
+        medim: {
+            recent: [],
+            data: []
         },
-        data: []
-    },
-    cnn: {
-        header: 0,
-        recent: {
-            politics: [],
-            china: [],
-            life: [],
-            tech: [],
-            business: []
+        bbc: {
+            header: 0,
+            recent: {
+                politics: [],
+                china: [],
+                life: [],
+                tech: [],
+                business: []
+            },
+            data: []
         },
-        data: []
-    },
-    reuters: {
-        header: 0,
-        recent: {
-            politics: [],
-            china: [],
-            life: [],
-            tech: [],
-            business: []
+        cnn: {
+            header: 0,
+            recent: {
+                politics: [],
+                china: [],
+                life: [],
+                tech: [],
+                business: []
+            },
+            data: []
         },
-        data: []
-    },
-    mbook: {
-        recent: {},
-        data: []
+        reuters: {
+            header: 0,
+            recent: {
+                politics: [],
+                china: [],
+                life: [],
+                tech: [],
+                business: []
+            },
+            data: []
+        },
+        mbook: {
+            recent: {},
+            data: []
+        }
+    };
+    
+    const pushCacheData = function (source, obj) {
+        console.log(cache);
+        if (checkExists(source, obj._id)) {
+            let index = cache[source]
+                .data
+                .findIndex(x => x._id === obj._id);
+            let item = cache[source]
+                .data
+                .filter(x => x._id === obj._id);
+            item = Object.assign(item, Object.assign({}, obj));
+            cache[source].data[index] = item;
+        } else {
+            cache[source]
+                .data
+                .push(Object.assign({}, obj));
+        }
     }
-};
-
-const pushCacheData = function (source, obj) {
-    if (checkExists(source, obj._id)) {
-        let index = cache[source]
-            .data
-            .findIndex(x => x._id === obj._id);
-        let item = cache[source]
-            .data
-            .filter(x => x._id === obj._id);
-        item = Object.assign(item, Object.assign({}, obj));
-        cache[source].data[index] = item;
-    } else {
+    
+    const checkExists = function (source, id) {
+        let exists = false;
         cache[source]
             .data
-            .push(Object.assign({}, obj));
+            .forEach(e => {
+                if (e._id === id) {
+                    exists = true;
+                }
+            });
+        return exists;
     }
-}
-
-const checkExists = function (source, id) {
-    let exists = false;
-    cache[source]
-        .data
-        .forEach(e => {
-            if (e._id === id) {
-                exists = true;
-            }
-        });
-    return exists;
-}
-
-const pushNewsRecent = (source, tag, _id) => {
-    console.log("pushNewsRecent")
-    let recent = cache[source].recent[tag];
-    if(!recent.includes(_id))
-        recent.push(_id);
-}
-
-const pushOtherRecent=(source,_id)=>{
-    console.log("pushNewsRecent");
-    let recent = cache[source].recent;
-    if(!recent.includes(_id))
-        recent.push(_id);
-}
-
-
-const getRecentNewsCache=(source,tag,)=>{
     
-}
+    const pushNewsRecent = (source, tag, _id) => {
+        let recent = cache[source].recent[tag];
+        if (!recent.includes(_id)) 
+            recent.push(_id);
+        }
+    
+    const pushOtherRecent = (source, _id) => {
+        let recent = cache[source].recent;
+        if (!recent.includes(_id)) 
+            recent.push(_id);
+        }
+    
+    
+    const getData = (source, id) => {
+        let datas = cache[source].data;
+        return datas.filter(d=>d._id === id)[0];
+    }
+    
+    
+    const checkFieldsExsits = (source, _id, field) => {
+        let datas = cache[source].data;
+        if (!checkExists(source, _id)) {
+            return false;
+        } else {
+            let data = getData(source, _id);
+            console.log(data);
+            if (data[field]) 
+                return true;
+            else 
+                return false;
+            }
+        
+    }    
+
+    return {
+        pushCacheData,pushNewsRecent,checkExists,pushOtherRecent,checkFieldsExsits,cache
+    }
+})();
+
+
+
+
+
 
