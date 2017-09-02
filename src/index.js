@@ -12,6 +12,7 @@ import Article from './components/news/Article';
 import {mockClient} from './repository/client'
 import Feedback from './components/others/Feedback';
 import About from './components/others/About';
+import RouterEntry from './RouterEntry';
 const IMAGE_DATA = [
   {
     src: require('./components/slider/images/demo1.jpg'),
@@ -26,7 +27,7 @@ const IMAGE_DATA = [
 ];
 
 render(
-  <Feedback categories={["UI","资源","stack长得帅"]}/>
+  <RouterEntry/>
   ,
 document.getElementById('root'));
 registerServiceWorker();

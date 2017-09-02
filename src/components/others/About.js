@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import Typography from 'material-ui/Typography';
 import withAppBar from './withAppBar';
 import Paper from 'material-ui/Paper';
-
+import {withLink} from '../withLink';
 
 
 const About = (props) => {
     return (
-        <div style={{ marginTop: '3px', width: '100%' }}>
-            <Paper style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <div style={{ marginTop: '3px', width: '100%'}}>
+            <Paper style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }} elevation={0}>
                 <div style={{marginLeft:'3px',marginRight:'3px'}}>
                 <Typography style={{ display: 'flex', justifyContent: 'center', marginTop:"5px"}} type="title" gutterBottom>
                     {"关于"}
@@ -39,5 +39,4 @@ const About = (props) => {
 };
 
 
-
-export default withAppBar(About,"关于");
+export default withAppBar(About,"关于")
