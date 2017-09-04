@@ -1,10 +1,7 @@
-const host = "localhost:3001";
+const host = "localhost:3002";
 const url = "/api/v1/";
 const defaultDomain = host + url;
-const defaultHeaders = {
-    method: 'GET',
-    cache: 'default'
-}
+
 
 
 export const constructRecentNewsUrl = (source, tag, count = 5, fields) => {
@@ -26,7 +23,7 @@ export const constructIdNewsUrl = (source, id, fields) => {
     let _fields = fields
         ? "fields=" + fields.join(',')
         : '';
-    url = url + fields;
+    url = url + _fields;
     console.log('[constructIdNewsUrl] url=' + url);
     return url;
 };

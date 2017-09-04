@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const entry = './src/index.js';
+const entry = './src/repository/netClient.js';
 
 const outputPath = "./dist"
 
@@ -19,10 +19,13 @@ plugins.push(new webpack.optimize.UglifyJsPlugin({
 const config = {
     target: 'web',
     cache: true,
-    entry: entry,
+    entry:{
+        client:'./src/repository/netClient.js',
+        cache: './src/utility/cache.js',
+    },
     output: {
         path: path.join(__dirname, outputPath),
-        filename: 'js/bundle.js'
+        filename: 'js/[name].js'
     },
 
     module: {
@@ -53,7 +56,7 @@ const config = {
         ]
     },
 
-    plugins: plugins,
+    // plugins: plugins,
     // resolve: {     // root: __dirname, extensions: ['', '.js', '.jsx'] },
 
     devtool: 'source-map'
