@@ -1,6 +1,6 @@
 window.cacheClient = (() => {
     const cache = {
-        medim: {
+        medium: {
             recent: [],
             data: []
         },
@@ -38,7 +38,7 @@ window.cacheClient = (() => {
             data: []
         },
         mbook: {
-            recent: {},
+            recent: [],
             data: []
         }
     };
