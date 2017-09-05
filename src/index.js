@@ -3,8 +3,8 @@ import {render} from 'react-dom';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import * as client from './repository/client'
 import 'typeface-roboto';
+<<<<<<< HEAD
 import {BrowserRouter as Router} from 'react-router-dom';
 import TaggedNewsContainer from './components/news/TaggedNewssContainer';
 import Slider from './components/slider/Slider';
@@ -24,6 +24,9 @@ const IMAGE_DATA = [
     alt: 'images-3'
   }
 ];
+=======
+
+>>>>>>> cache-support
 
 render(
   <Feedback categories={["UI","资源","stack长得帅"]}/>
