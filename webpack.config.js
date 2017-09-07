@@ -5,7 +5,7 @@ const entry = './src/index.js';
 
 const outputPath = "./dist"
 
-const AddExports  = require('babel-plugin-add-module-exports');
+const AddExports = require('babel-plugin-add-module-exports');
 const plugins = [];
 plugins.push(new webpack.optimize.UglifyJsPlugin({
     test: /(\.jsx|\.js)$/,
@@ -14,15 +14,17 @@ plugins.push(new webpack.optimize.UglifyJsPlugin({
     }
 }));
 
-
-
 const config = {
     target: 'web',
     cache: true,
-    entry: entry,
+    entry: {
+        client: './src/repository/netClient.js',
+        cache: './src/utility/cache.js',
+        bundle: './src/index.js'
+    },
     output: {
         path: path.join(__dirname, outputPath),
-        filename: 'js/bundle.js'
+        filename: 'js/[name].js'
     },
 
     module: {
@@ -53,7 +55,6 @@ const config = {
         ]
     },
 
-    plugins: plugins,
     // resolve: {     // root: __dirname, extensions: ['', '.js', '.jsx'] },
 
     devtool: 'source-map'

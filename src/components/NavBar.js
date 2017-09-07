@@ -39,7 +39,7 @@ class NavBar extends Component {
         }
     }
 
-    componentDidMount = () => {
+    componentDidMount() {
         this.setState({
             sAnchor: findDOMNode(this.sMenuB),
             tAnchor: findDOMNode(this.tMenuB)

@@ -17,8 +17,8 @@ let {
 let cacheClient = window.cacheClient;
 window.client = (function () {
     let getNewsRecent = function (source, tag, count, fields) {
+        let isSummaryRequired = fields.includes('summary');
         let recentLen = cacheClient.cache[source].recent[tag].length;
-        console.log(`[getNewsRecent] current there is ${recentLen} in ${source} recent`);
         /**
          * 已经缓存的最近新闻
          */
@@ -29,31 +29,25 @@ window.client = (function () {
          */
         if (recentLen < count) {
             console.log('[getNewsRecent] fetching');
-            fetch(constructor.constructRecentNewsUrl(source, tag, count, ['id']), defaultHeaders).then(response => {
+            return fetch(constructor.constructRecentNewsUrl(source, tag, count, ['id']), defaultHeaders).then(response => {
                 if (response.ok) {
-                    response
+                    return response
                         .json()
                         .then(body => {
                             let recentids = body
                                 .data
                                 .map(d => d._id);
-                            recentids.forEach((id) => {
-                                cacheClient.pushNewsRecent(source, tag, id);
-                                recentPromises.push(getNewsById(source, id, fields));
-                            });
-                        });
+                            recentids.forEach((id) => cacheClient.pushNewsRecent(source, tag, id));
+                            let newRecentIds = cacheClient.cache[source].recent[tag];
+                            return Promise.all(newRecentIds.map(id => getNewsById(source, id, fields)));
+                        })
                 }
             })
+        } else {
+            let newRecentIds = cacheClient.cache[source].recent[tag];
+            return Promise.all(newRecentIds.map(id => getNewsById(source, id, fields)));
         }
 
-        let newss = [];
-        Promise
-            .all(recentPromises)
-            .then(datas => {
-                datas.forEach(data => newss.push(data));
-            })
-        console.log(`[getNewsRecent]: ${newss}`);
-        return Promise.resolve(newss);
     }
     let getNewsById = (source, id, fields) => {
         let unMetFields = fields.filter(f => (!checkFieldsExsits(source, id, f)));
@@ -65,12 +59,14 @@ window.client = (function () {
             console.log('[getNewsById]: feching');
             return fetch(constructor.constructIdNewsUrl(source, id, unMetFields), defaultHeaders).then((res => {
                 if (res.ok) {
-                    res
+                    return res
                         .json()
                         .then(body => {
                             if (body.count === 1) {
                                 cacheClient.pushCacheData(source, body.data[0]);
-                                return Promise.resolve(cacheClient.getData(source, id));
+                                // console.log(body.data[0]);
+                                return cacheClient.getData(source, id);
+                                // return Promise.resolve(cacheClient.getData(source, id));
                             } else 
                                 throw new Error(`[getNewsById] get ${body.count} data`);
                             }
@@ -89,7 +85,7 @@ window.client = (function () {
 
     let getMediumById = (id, fields) => {
 
-        let source ='medium';
+        let source = 'medium';
         let unMetFields = fields.filter(f => (!checkFieldsExsits(source, id, f)));
         console.log(`[getMediumById] unmetFields ${unMetFields.length}`);
 
@@ -116,8 +112,8 @@ window.client = (function () {
         }
     }
     let getMediumRecent = function (count = 5, fields) {
-        
-        let source ='medium';
+
+        let source = 'medium';
         let recentLen = cacheClient.cache[source].recent.length;
         console.log(`[getMediumRecent] current there is ${recentLen} in ${source} recent`);
         // fields.forEach(f=>console.log(f));
@@ -158,10 +154,9 @@ window.client = (function () {
         return Promise.resolve(blogs);
     }
 
-
-    let getMBookById = function(id,fields){
-        let source ='mbook';
-        let method= '[getMBookById]'
+    let getMBookById = function (id, fields) {
+        let source = 'mbook';
+        let method = '[getMBookById]'
         let unMetFields = fields.filter(f => (!checkFieldsExsits(source, id, f)));
         console.log(`[getMBookById] unmetFields ${unMetFields.length}`);
 
@@ -188,8 +183,8 @@ window.client = (function () {
         }
     };
     let getMBookRecent = function (count = 5, fields) {
-        
-        let source ='mbook';
+
+        let source = 'mbook';
         let recentLen = cacheClient.cache[source].recent.length;
         console.log(`[getMBookRecent] current there is ${recentLen} in ${source} recent`);
         // fields.forEach(f=>console.log(f));
@@ -203,7 +198,7 @@ window.client = (function () {
          */
         if (recentLen < count) {
             console.log('[getMBookRecent] fetching');
-            fetch(constructor.constructRecentNewsUrl(source,null,count, ['id']), defaultHeaders).then(response => {
+            fetch(constructor.constructRecentNewsUrl(source, null, count, ['id']), defaultHeaders).then(response => {
                 if (response.ok) {
                     response
                         .json()
@@ -230,5 +225,13 @@ window.client = (function () {
         return Promise.resolve(blogs);
     }
 
-    return {getNewsRecent, getNewsById, getNewsByTag, getMediumById, getMediumRecent,getMBookById,getMBookRecent}
+    return {
+        getNewsRecent,
+        getNewsById,
+        getNewsByTag,
+        getMediumById,
+        getMediumRecent,
+        getMBookById,
+        getMBookRecent
+    }
 })();

@@ -22,6 +22,7 @@ const config = {
     entry:{
         client:'./src/repository/netClient.js',
         cache: './src/utility/cache.js',
+        bundle:'./src/index.js',
     },
     output: {
         path: path.join(__dirname, outputPath),

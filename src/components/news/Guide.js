@@ -17,39 +17,36 @@ class Guide extends Component {
             listData: {}
         }
     }
-    componentWillUnmount() {
-    }
 
+    static get component() {
+        return "[Guide]";
+    }
+    componentWillUnmount() {}
+
+    fetchData(source) {
+        let client = window.client;
+        NewsTags.forEach(tag => client.getNewsRecent(source, tag, 2, NewsListItemFields).then(datas => {
+            let newListData = cloneDeep(this.state.listData);
+            newListData[tag] = datas
+            this.setState({listData: newListData})
+        }))
+        client
+            .getNewsRecent(source, 'tech', 1, NewsListItemFields)
+            .then(data => {
+                this.setState({headerData: data[0]});
+            })
+
+    }
     componentWillReceiveProps(nextProps) {
         let {source} = nextProps;
-        let oldSource = this.props;
+        let oldSource = this.props.Source;
         if (source !== oldSource) {
-            NewsTags.forEach(tag => mockClient.getNewsRecent(source, tag, 1, NewsListItemFields).then(data => {
-                let newListData = cloneDeep(this.state.listData);
-                newListData[tag] = data.data;
-                this.setState({listData: newListData})
-            }));
-            mockClient
-                .getNewsRecent(source, 'world', 1, NewsListItemFields)
-                .then(data => {
-                    this.setState({headerData: data.data[0]});
-                })
+           this.fetchData(source); 
         }
     }
 
-
     componentDidMount() {
-        let {source} = this.props
-        NewsTags.forEach(tag => mockClient.getNewsRecent(source, tag, 1, NewsListItemFields).then(data => {
-            let newListData = cloneDeep(this.state.listData);
-            newListData[tag] = data.data;
-            this.setState({listData: newListData})
-        }));
-        mockClient
-            .getNewsRecent(source, 'world', 1, NewsListItemFields)
-            .then(data => {
-                this.setState({headerData: data.data[0]});
-            })
+        this.fetchData(this.props.source);
     }
 
     render() {
@@ -61,7 +58,7 @@ class Guide extends Component {
             .map(tag => {
                 let dataByTag = listData[tag];
                 return (<NewsByTag
-                key={tag}
+                    key={tag}
                     source={source}
                     tag={capitalize(tag)}
                     newss={dataByTag}
@@ -72,9 +69,10 @@ class Guide extends Component {
                 <Header
                     id={state.headerData && state.headerData._id}
                     title={state.headerData && state.headerData.title}
-                    summary={state.headerData.summary}
+                    summary={state.headerData&&state.headerData.summary}
                     img={state.headerData.image_urls && state.headerData.image_urls[0]}/> 
-                    {newsbytags}
+
+                {newsbytags}
             </div>
         )
     }

@@ -4,10 +4,10 @@ export const NewsTags=[
 
 
 export const NewsListItemFields=[
-    '_id','title','image_urls','summary','tag'
+    'id','title','image_urls','tag','summary'
 ]
 
 
 export const AllNewsFields=[
-    '_id','title','url','timestamp','crawled_at','summary','image_urls','text','tag','source'
+    'id','title','url','timestamp','crawled_at','summary','image_urls','text','tag','source'
 ]

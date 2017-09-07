@@ -32,7 +32,7 @@ class NewsArticleContainer extends Component {
         }
     };
 
-    componentDidMount = () => {
+    componentDidMount() {
        this.fetchData(this.props.source, this.props._id);
     }
 
