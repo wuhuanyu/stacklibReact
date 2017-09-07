@@ -6,6 +6,13 @@ window.cacheClient = (() => {
         },
         bbc: {
             header: 0,
+            tags: {
+                politics: [],
+                china: [],
+                life: [],
+                tech: [],
+                business: []
+            },
             recent: {
                 politics: [],
                 china: [],
@@ -99,7 +106,11 @@ window.cacheClient = (() => {
             return false;
         } else {
             let data = getData(source, _id);
-            // console.log(data);
+            if(field=='id'){
+                if(data['_id']){
+                    return true;
+                }
+            }
             if (data[field]) 
                 return true;
             else 

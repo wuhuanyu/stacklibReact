@@ -32,7 +32,9 @@ const NewsListItem = (props) => {
 
                     <CardContent
                         style={{
-                        width: '100%'
+                           display:'flex',
+                           alignItems:'center' ,
+                        width: '70%'
                     }}>
                         <Typography type="subheading">
                             {title}
@@ -41,7 +43,9 @@ const NewsListItem = (props) => {
 
                     <CardMedia
                         style={{
-                        float: 'left',
+                            display:'flex',
+                            alignItems:'center',
+                            width:'30%',
                         marginRight: '5px',
                         marginTop: '5px'
                     }}>
@@ -50,7 +54,7 @@ const NewsListItem = (props) => {
                             src={img}
                             style={{
 
-                            width: '80px',
+                            width: '100%',
                             height: 'auto'
                         }}/>
                     </CardMedia>

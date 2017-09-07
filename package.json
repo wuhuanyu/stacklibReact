@@ -19,6 +19,7 @@
     "typeface-roboto": "0.0.31"
   },
   "scripts": {
+    "run":"node ./devServer.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

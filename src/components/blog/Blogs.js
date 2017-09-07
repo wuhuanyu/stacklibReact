@@ -4,7 +4,7 @@ import BlogItem from './BlogItem';
 import Divider from 'material-ui/Divider';
 import {withStyles} from 'material-ui/styles';
 import {mockClient} from '../../repository/client';
-import {capitalize,num2Time} from '../../utility/Utils';
+import {capitalize, num2Time} from '../../utility/Utils';
 
 const CSS = theme => ({});
 
@@ -17,24 +17,38 @@ class Blogs extends Component {
     }
 
     componentDidMount() {
-        const _this = this;
-        mockClient
-            .getBlogRecent('medium', 3, ['title', '_id', 'summary', 'image_urls','crawled_at'])
+        console.log('Blog mounted');
+        let client = window.client;
+        let _this = this;
+        client
+            .getMediumRecent(5, ['title', 'id', 'summary', 'image_urls', 'crawled_at'])
             .then(res => {
-                _this.setState({blogsData:res.data});
+                console.log(res.length);
+                _this.setState({blogsData: res});
             });
+    }
+
+    componentWillUnmount() {
+        console.log('Blog umount');
     }
 
     render() {
         let {blogsData} = this.state;
-        let blogItems = blogsData.map(blog => {
-            return <div><BlogItem
-                key={blog._id}
-                title={blog.title}
-                crawled_at={num2Time(blog.crawled_at)}
-                img_urls={blog.image_urls}
-                summary={blog.summary}/>
-                <Divider style={{marginTop:'2px'}}/>
+        
+        console.log(blogsData.length);
+        let blogItems = blogsData.map((blog, idx) => {
+            return <div>
+                <BlogItem
+                    key={blog._id}
+                    title={blog.title}
+                    crawled_at={num2Time(blog.crawled_at)}
+                    img_urls={blog.image_urls}
+                    summary={blog.summary}/>
+                <Divider
+                    key={idx}
+                    style={{
+                    marginTop: '2px'
+                }}/>
             </div>
         });
         return <div>
@@ -43,9 +57,6 @@ class Blogs extends Component {
     }
 }
 
-
 export default Blogs;
 
-// Blogs.PropTypes = {
-//     blogs: PropTypes.array.isRequired
-// }
+// Blogs.PropTypes = {     blogs: PropTypes.array.isRequired }

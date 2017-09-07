@@ -17,8 +17,9 @@ let {
 let cacheClient = window.cacheClient;
 window.client = (function () {
     let getNewsRecent = function (source, tag, count, fields) {
-        let isSummaryRequired = fields.includes('summary');
+        // let isSummaryRequired = fields.includes('summary');
         let recentLen = cacheClient.cache[source].recent[tag].length;
+        console.log(`[getNewsRecent] oldRecentLen ${recentLen}`);
         /**
          * 已经缓存的最近新闻
          */
@@ -56,7 +57,6 @@ window.client = (function () {
         if (unMetFields.length === 0) {
             return Promise.resolve(cacheClient.getData(source, id));
         } else {
-            console.log('[getNewsById]: feching');
             return fetch(constructor.constructIdNewsUrl(source, id, unMetFields), defaultHeaders).then((res => {
                 if (res.ok) {
                     return res
@@ -64,9 +64,7 @@ window.client = (function () {
                         .then(body => {
                             if (body.count === 1) {
                                 cacheClient.pushCacheData(source, body.data[0]);
-                                // console.log(body.data[0]);
                                 return cacheClient.getData(source, id);
-                                // return Promise.resolve(cacheClient.getData(source, id));
                             } else 
                                 throw new Error(`[getNewsById] get ${body.count} data`);
                             }
@@ -95,7 +93,7 @@ window.client = (function () {
             console.log('[getMediumById]: feching');
             return fetch(constructor.constructIdNewsUrl(source, id, unMetFields), defaultHeaders).then((res => {
                 if (res.ok) {
-                    res
+                    return res
                         .json()
                         .then(body => {
                             if (body.count === 1) {
@@ -116,7 +114,6 @@ window.client = (function () {
         let source = 'medium';
         let recentLen = cacheClient.cache[source].recent.length;
         console.log(`[getMediumRecent] current there is ${recentLen} in ${source} recent`);
-        // fields.forEach(f=>console.log(f));
         /**
          * 已经缓存的最近文章
          */
@@ -127,31 +124,28 @@ window.client = (function () {
          */
         if (recentLen < count) {
             console.log('[getMediumRecent] fetching');
-            fetch(constructor.constructRecentMedium(count, ['id']), defaultHeaders).then(response => {
+            return fetch(constructor.constructRecentMedium(count, ['id']), defaultHeaders).then(response => {
                 if (response.ok) {
-                    response
+                    return response
                         .json()
                         .then(body => {
                             let recentids = body
                                 .data
                                 .map(d => d._id);
-                            recentids.forEach((id) => {
-                                cacheClient.pushOtherRecent(source, id);
-                                recentPromises.push(getMediumById(id, fields));
-                            });
+                            recentids.forEach((id) => cacheClient.pushOtherRecent(source, id));
+                            let newRecentIds = cacheClient.cache['medium'].recent;
+                            newRecentIds.forEach(id => console.log(id));
+                            console.log(newRecentIds.length);
+                            return Promise.all(newRecentIds.map(id => getMediumById(id, fields)));
                         });
+                } else {
+                    return Promise.reject(`NetworkError: ${response.status}`);
                 }
             })
+        } else {
+            let newRecentIds = cacheClient.cache['medium'].recent;
+            return Promise.all(newRecentIds.map(id => getMediumById(id, fields)));
         }
-
-        let blogs = [];
-        Promise
-            .all(recentPromises)
-            .then(datas => {
-                datas.forEach(data => blogs.push(data));
-            })
-        console.log(`[getNewsRecent]: ${blogs}`);
-        return Promise.resolve(blogs);
     }
 
     let getMBookById = function (id, fields) {
@@ -166,7 +160,7 @@ window.client = (function () {
             console.log('[getMBookById]: feching');
             return fetch(constructor.constructIdNewsUrl(source, id, unMetFields), defaultHeaders).then((res => {
                 if (res.ok) {
-                    res
+                    return res
                         .json()
                         .then(body => {
                             if (body.count === 1) {
@@ -198,9 +192,9 @@ window.client = (function () {
          */
         if (recentLen < count) {
             console.log('[getMBookRecent] fetching');
-            fetch(constructor.constructRecentNewsUrl(source, null, count, ['id']), defaultHeaders).then(response => {
+           return fetch(constructor.constructRecentNewsUrl(source, null, count, ['id']), defaultHeaders).then(response => {
                 if (response.ok) {
-                    response
+                    return response
                         .json()
                         .then(body => {
                             let recentids = body
@@ -208,21 +202,18 @@ window.client = (function () {
                                 .map(d => d._id);
                             recentids.forEach((id) => {
                                 cacheClient.pushOtherRecent(source, id);
-                                recentPromises.push(getMBookById(id, fields));
                             });
+                            let newRecentIds = cacheClient.cache['mbook'].recent;
+                            return Promise.all(newRecentIds.map(id => getMBookById(id, fields)));
                         });
+                } else 
+                    return Promise.reject(`NewworkError: ${response.status}`);
                 }
-            })
+            )
+        } else {
+            return Promise.all(oldRecentIds.map(id => getMBookById(id, fields)));
         }
 
-        let blogs = [];
-        Promise
-            .all(recentPromises)
-            .then(datas => {
-                datas.forEach(data => blogs.push(data));
-            })
-        console.log(`[getMBookRecent]: ${blogs}`);
-        return Promise.resolve(blogs);
     }
 
     return {

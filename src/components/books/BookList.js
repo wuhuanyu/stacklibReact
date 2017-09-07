@@ -13,10 +13,11 @@ class BookList extends Component {
     }
 
     componentDidMount() {
-        mockClient
-            .getBookRecent(3, ['_id', 'crawled_at', 'title', 'image_urls', 'summary'])
+        let client = window.client;
+        let _this = this;
+          client.getMBookRecent(3, ['id', 'crawled_at', 'title', 'image_urls', 'summary'])
             .then(res => {
-                this.setState({ bookData: res.data })
+                _this.setState({ bookData: res })
             })
     }
 

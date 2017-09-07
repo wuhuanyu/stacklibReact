@@ -45,7 +45,6 @@ class NewsByTag extends Component {
 NewsByTag.PropTypes = {
     source: PropTypes.string.isRequired,
     newss:PropTypes.array.isRequired,
-    // classes: PropTypes.object.isRequired,
     tag_img_url:PropTypes.object.isRequired,
     tag:PropTypes.string.isRequired,
 }
