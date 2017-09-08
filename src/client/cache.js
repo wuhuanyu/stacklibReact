@@ -9,38 +9,60 @@ window.cacheClient = (() => {
             tags: {
                 politics: [],
                 china: [],
-                life: [],
+                health: [],
                 tech: [],
-                business: []
+                business: [],
+                entertainment: []
             },
             recent: {
                 politics: [],
                 china: [],
-                life: [],
+                health: [],
                 tech: [],
-                business: []
+                business: [],
+                entertainment: []
             },
             data: []
         },
         cnn: {
             header: 0,
+            tags: {
+                politics: [],
+                china: [],
+                life: [],
+                tech: [],
+                business: [],
+                health: []
+            },
             recent: {
                 politics: [],
                 china: [],
                 life: [],
                 tech: [],
-                business: []
+                business: [],
+                health: []
             },
             data: []
         },
         reuters: {
             header: 0,
+            tags: {
+                politics: [],
+                china: [],
+                life: [],
+                tech: [],
+                business: [],
+                art: [],
+                sport: []
+            },
             recent: {
                 politics: [],
                 china: [],
                 life: [],
                 tech: [],
-                business: []
+                business: [],
+                art: [],
+                sport: []
             },
             data: []
         },
@@ -79,6 +101,15 @@ window.cacheClient = (() => {
         return exists;
     }
 
+    const pushNewsByTag = (source, tag, id) => {
+        let newss = cache[source].tags[tag];
+        if (!newss.includes(id)) {
+            newss.push(id);
+        }
+    }
+
+
+
     const pushNewsRecent = (source, tag, _id) => {
         let recent = cache[source].recent[tag];
         if (!recent.includes(_id)) 
@@ -105,8 +136,8 @@ window.cacheClient = (() => {
             return false;
         } else {
             let data = getData(source, _id);
-            if(field=='id'){
-                if(data['_id']){
+            if (field == 'id') {
+                if (data['_id']) {
                     return true;
                 }
             }
@@ -125,7 +156,7 @@ window.cacheClient = (() => {
         checkExists,
         pushOtherRecent,
         checkFieldsExsits,
-
+        pushNewsByTag,
         cache,
         getData
     }
