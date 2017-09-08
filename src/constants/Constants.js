@@ -11,6 +11,9 @@ export const NewsListItemFields=[
 export const AllNewsFields=[
     'id','title','url','timestamp','crawled_at','summary','image_urls','text','tag','source'
 ]
+export const AllBlogFields=[
+    'id','title','url','crawled_at','image_urls','text','summary',
+]
 
 
 export const host= "192.168.1.104";

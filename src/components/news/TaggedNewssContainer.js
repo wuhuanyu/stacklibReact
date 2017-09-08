@@ -37,6 +37,7 @@ class TaggedNewssContainer extends Component {
     }
 
     componentDidMount() {
+        let {source,tag} = this.props.match.params;
         let {sources, tags, cS, cT} = this.state;
         this.fetchData(sources[cS], tags[cT], 3, AllNewsFields);
     }
