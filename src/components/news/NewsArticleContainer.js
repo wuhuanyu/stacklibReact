@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import {mockClient} from '../../repository/client';
 import {AllNewsFields} from '../../constants/Constants';
 import Article from './Article';
 import {num2Time} from '../../utility/Utils';

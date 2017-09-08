@@ -1,6 +1,7 @@
-const host = "localhost:3002";
+const host = "192.168.1.104:3002";
 const url = "/api/v1/";
-const defaultDomain = host + url;
+// const defaultDomain = host + url;
+import {domain as defaultDomain} from '../constants/Constants';
 
 
 

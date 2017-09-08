@@ -8,12 +8,9 @@ import {BrowserRouter as Router} from 'react-router-dom';
 import TaggedNewsContainer from './components/news/TaggedNewssContainer';
 
 import Article from './components/news/Article';
-import {mockClient} from './repository/client'
 import Feedback from './components/others/Feedback';
 import About from './components/others/About';
 
 render(
-  <App/>
-  ,
-document.getElementById('root'));
+  <App/>, document.getElementById('root'));
 registerServiceWorker();

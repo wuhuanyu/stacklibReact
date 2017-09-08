@@ -6,7 +6,6 @@ import List, {ListItem} from 'material-ui/List';
 import {CardContent, CardMedia} from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import NewsListItem from './NewsListItem';
-import {mockClient} from '../../repository/client';
 import Chip from 'material-ui/Chip';
 import ButtonBase from 'material-ui/ButtonBase';
 import Tag from './Tag';

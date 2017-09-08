@@ -18,8 +18,8 @@ const config = {
     target: 'web',
     cache: true,
     entry: {
-        client: './src/repository/netClient.js',
-        cache: './src/utility/cache.js',
+        client: './src/client/client.js',
+        cache: './src/client/cache.js',
         bundle: './src/index.js'
     },
     output: {
@@ -55,6 +55,7 @@ const config = {
         ]
     },
 
+    plugins:plugins,
     // resolve: {     // root: __dirname, extensions: ['', '.js', '.jsx'] },
 
     devtool: 'source-map'

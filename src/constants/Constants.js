@@ -11,3 +11,8 @@ export const NewsListItemFields=[
 export const AllNewsFields=[
     'id','title','url','timestamp','crawled_at','summary','image_urls','text','tag','source'
 ]
+
+
+export const host= "192.168.1.104";
+export const port = "3002";
+export const domain = host+":"+port+"/api/v1/";

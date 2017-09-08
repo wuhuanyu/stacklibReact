@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {host,port} from '../../constants/Constants';
 import List from 'material-ui/List';
 import {GridList, GridListTile, GridListTileBar} from 'material-ui/GridList';
 import ListItem from 'material-ui/List';
@@ -25,7 +26,7 @@ const TaggedCommonNewss = ({source, newss, tag}) => {
                 source={source}
                 tag={tag}
                 newss={newss}
-                tag_img_url={"http://localhost:3001/imgs/"+tag+".jpg"}/>
+                tag_img_url={`http://${host}:${port}/static/images/${tag}.jpg`}/>
 
         </div>
     )
@@ -43,7 +44,7 @@ const TaggedLifeNewss = ({source, newss, classes}) => {
         <div>
             <Tag 
             tag={"life"}
-            tag_img_url={"http://localhost:3001/imgs/life.jpg"}
+            tag_img_url={`http://${host}:${port}/static/images/life.jpg`}
             />
             <GridList
                 cellHeight={200}

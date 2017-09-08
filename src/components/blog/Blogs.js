@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import BlogItem from './BlogItem';
 import Divider from 'material-ui/Divider';
 import {withStyles} from 'material-ui/styles';
-import {mockClient} from '../../repository/client';
 import {capitalize, num2Time} from '../../utility/Utils';
 
 const CSS = theme => ({});

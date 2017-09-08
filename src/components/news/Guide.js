@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import MockRep from '../..//repository/MockRep';
 import noPic from '../../repository/nopic.jpg';
 import NewsByTag from './NewsByTag';
 import Header from './Header';
-import {mockClient} from '../../repository/client';
 import {NewsTags, NewsListItemFields} from '../../constants/Constants';
+import {domain} from '../../constants/Constants';
 import {capitalize} from '../../utility/Utils';
 const cloneDeep = require('clone-deep');
-const tag_img__base = "http://localhost:3001/imgs/";
+const tag_img__base = "http://192.168.1.104:3001/imgs/";
 class Guide extends Component {
     constructor(props) {
         super(props);
