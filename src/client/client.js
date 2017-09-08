@@ -17,7 +17,6 @@ let {
 let cacheClient = window.cacheClient;
 window.client = (function () {
     let getNewsRecent = function (source, tag, count, fields) {
-        // let isSummaryRequired = fields.includes('summary');
         let recentLen = cacheClient.cache[source].recent[tag].length;
         console.log(`[getNewsRecent] oldRecentLen ${recentLen}`);
         /**

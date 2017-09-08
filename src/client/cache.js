@@ -51,7 +51,6 @@ window.cacheClient = (() => {
     };
 
     const pushCacheData = function (source, obj) {
-        // console.log(cache);
         if (checkExists(source, obj._id)) {
             let index = cache[source]
                 .data
