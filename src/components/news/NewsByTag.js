@@ -9,7 +9,8 @@ import NewsListItem from './NewsListItem';
 import Chip from 'material-ui/Chip';
 import ButtonBase from 'material-ui/ButtonBase';
 import Tag from './Tag';
-
+import {host,port} from '../../constants/Constants';
+const tag_img_url= `http://${host}:${port}/static/images/`;
 class NewsByTag extends Component {
     constructor(props) {
         super(props);

@@ -58,12 +58,12 @@ class Article extends Component {
     }
 
     componentDidMount() {
-        mockClient
-            .getNewsById('bbc', '313', AllNewsFields)
-            .then(res => {
-                this.setState({data: res.data})
-                console.log(res);
-            })
+        // mockClient
+        //     .getNewsById('bbc', '313', AllNewsFields)
+        //     .then(res => {
+        //         this.setState({data: res.data})
+        //         console.log(res);
+        //     })
     }
 
     render() {

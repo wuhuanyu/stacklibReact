@@ -15,4 +15,4 @@ export const AllNewsFields=[
 
 export const host= "192.168.1.104";
 export const port = "3002";
-export const domain = host+":"+port+"/api/v1/";
+export const domain = host+":"+port+"/api/v1/";;

@@ -33,7 +33,7 @@ class TaggedNewssContainer extends Component {
     }
 
     fetchData(source, tag, count, fields) {
-        mockClient.getNewsRecent(source.toLowerCase(), tag.toLowerCase(), count, AllNewsFields).then(res => this.setState({data: res.data}));
+        // mockClient.getNewsRecent(source.toLowerCase(), tag.toLowerCase(), count, AllNewsFields).then(res => this.setState({data: res.data}));
     }
 
     componentDidMount() {

@@ -13,15 +13,15 @@ class NewsArticleContainer extends Component {
     }
 
     fetchData(source, _id) {
-        mockClient
-            .getNewsById(source, _id, AllNewsFields)
-            .then(res => {
-                console.log(res);
-                if(res.data.timestamp){
-                    res.data.timestamp=num2Time(res.data.timestamp);
-                }
-                this.setState({data: res.data})
-            })
+        // mockClient
+        //     .getNewsById(source, _id, AllNewsFields)
+        //     .then(res => {
+        //         console.log(res);
+        //         if(res.data.timestamp){
+        //             res.data.timestamp=num2Time(res.data.timestamp);
+        //         }
+        //         this.setState({data: res.data})
+        //     })
     };
 
     componentWillReceiveProps(nextProps) {

@@ -4,10 +4,10 @@ import noPic from '../../repository/nopic.jpg';
 import NewsByTag from './NewsByTag';
 import Header from './Header';
 import {NewsTags, NewsListItemFields} from '../../constants/Constants';
-import {domain} from '../../constants/Constants';
+import {domain,host,port} from '../../constants/Constants';
 import {capitalize} from '../../utility/Utils';
 const cloneDeep = require('clone-deep');
-const tag_img__base = "http://192.168.1.104:3001/imgs/";
+const tag_img__base = `http://${host}:${port}/static/images/`;
 class Guide extends Component {
     constructor(props) {
         super(props);
