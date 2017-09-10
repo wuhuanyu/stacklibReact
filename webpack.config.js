@@ -55,7 +55,7 @@ const config = {
         ]
     },
 
-    plugins:plugins,
+    // plugins:plugins,
     // resolve: {     // root: __dirname, extensions: ['', '.js', '.jsx'] },
 
     devtool: 'source-map'

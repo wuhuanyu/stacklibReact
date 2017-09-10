@@ -11,14 +11,18 @@ import ButtonBase from 'material-ui/ButtonBase';
 import Tag from './Tag';
 import {host,port} from '../../constants/Constants';
 const tag_img_url= `http://${host}:${port}/static/images/`;
+import {Link} from 'react-router-dom';
+import {withLink} from '../withLink';
 class NewsByTag extends Component {
     constructor(props) {
         super(props);
     }
 
     render() {
-        let {newss,classes,tag_img_url,tag}=this.props;
-        let items = newss.map((d,idx) =>< NewsListItem key={d._id+idx} title = {
+        let {newss,classes,tag_img_url,tag,source}=this.props;
+        let items = newss.map((d,idx) =>
+        <Link style={{textDecoration:'none'}} to={`/news/${source}/${d._id}`}>
+        <NewsListItem key={d._id+idx} title = {
             d.title
         }
         img = {
@@ -26,7 +30,9 @@ class NewsByTag extends Component {
         }
         id = {
             d._id
-        } />);
+        } />
+        </Link>
+        );
         return (
             <div
                 style={{
@@ -34,7 +40,9 @@ class NewsByTag extends Component {
                 marginLeft: '5px',
                 marginRight: '5px'
             }}>
-                <Tag tag={tag} tag_img_url={tag_img_url}/> 
+            <Link style={{textDecoration:'none'}} to={`/tag/${source}/${tag}`}>
+                <Tag tag={tag} tag_img_url={tag_img_url} /> 
+                </Link>
                 {items}
             </div>
 

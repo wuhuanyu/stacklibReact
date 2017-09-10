@@ -12,7 +12,7 @@ class Guide extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            headerData: [],
+            headerData: {},
             listData: {}
         }
     }

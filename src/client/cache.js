@@ -12,7 +12,8 @@ window.cacheClient = (() => {
                 health: [],
                 tech: [],
                 business: [],
-                entertainment: []
+                entertainment: [],
+                life:[],
             },
             recent: {
                 politics: [],
@@ -20,7 +21,8 @@ window.cacheClient = (() => {
                 health: [],
                 tech: [],
                 business: [],
-                entertainment: []
+                entertainment: [],
+                life:[],
             },
             data: []
         },

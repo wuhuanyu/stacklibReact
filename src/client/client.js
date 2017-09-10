@@ -15,9 +15,10 @@ let {
 } = window.cacheClient;
 
 let cacheClient = window.cacheClient;
-let {cache} = cacheClient;
 window.client = (function () {
     let getNewsRecent = function (source, tag, count, fields) {
+        console.log('[getNewsRecent] ');
+        console.log(tag);
         let recentLen = cacheClient.cache[source].recent[tag].length;
         /**
          * 缓存中数量不足，网络请求
@@ -70,21 +71,21 @@ window.client = (function () {
 
     let getNewsByTag = (source, tag, count = 5, fields) => {
         let newss = cache[source].tags[tag];
-        if(count<=newss.length){
-            return Promise.all(newss.map(id=>getNewsById(source,id,fields)));
-        }
-        else{
-            return fetch(constructor.constructTagNewsUrl(source,tag,count,["id"])).then(
-                response=>{
-                    if(response.ok){
-                       return response.json().then(datas=>{
-                           let dataIds = datas.map(data=>data._id);
-                           dataIds.forEach(id=>pushNewsByTag(source,tag,id));
-                           let newIds = cache[source].tags[tag];
-                           return Promise.resolve(newIds.map(id=>getNewsById(source,id,fields)));
-                       }) 
-                    }
-                    else return Promise.reject(`NetworkError: ${response.status}`);
+        if (count <= newss.length) {
+            return Promise.all(newss.map(id => getNewsById(source, id, fields)));
+        } else {
+            return fetch(constructor.constructTagNewsUrl(source, tag, count, ["id"])).then(response => {
+                if (response.ok) {
+                    return response
+                        .json()
+                        .then(datas => {
+                            let dataIds = datas.map(data => data._id);
+                            dataIds.forEach(id => pushNewsByTag(source, tag, id));
+                            let newIds = cache[source].tags[tag];
+                            return Promise.resolve(newIds.map(id => getNewsById(source, id, fields)));
+                        })
+                } else 
+                    return Promise.reject(`NetworkError: ${response.status}`);
                 }
             )
         }
@@ -190,7 +191,7 @@ window.client = (function () {
         /**
          * 已经缓存的最近文章
          */
-        // let oldRecentIds = cacheClient.cache[source].recent; let recentPromises =
+        let oldRecentIds = cacheClient.cache[source].recent;
         // oldRecentIds.map(id => getMBookById(id, fields));
         /**
          * 缓存中数量不足，网络请求
