@@ -35,7 +35,7 @@ export const constructTagNewsUrl = (source, tag, count = 5, fields) => {
         ? "fields=" + fields.join(',') + '&'
         : '';
     let _count = "count=" + count;
-    url = url + _fields + count;
+    url = url + _fields + _count;
     console.log('[constructTagNewsUrl] url=' + url);
     return url;
 }

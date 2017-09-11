@@ -20,6 +20,9 @@ class NewsByTag extends Component {
 
     render() {
         let {newss,classes,tag_img_url,tag,source}=this.props;
+        // console.log('[NewsByTag]  ');
+        // console.log(source);
+        // console.log(tag);
         let items = newss.map((d,idx) =>
         <Link style={{textDecoration:'none'}} to={`/news/${source}/${d._id}`}>
         <NewsListItem key={d._id+idx} title = {
@@ -40,7 +43,7 @@ class NewsByTag extends Component {
                 marginLeft: '5px',
                 marginRight: '5px'
             }}>
-            <Link style={{textDecoration:'none'}} to={`/tag/${source}/${tag}`}>
+            <Link style={{textDecoration:'none'}} to={`/tag/${source}/${tag[0].toLowerCase()+tag.slice(1)}`}>
                 <Tag tag={tag} tag_img_url={tag_img_url} /> 
                 </Link>
                 {items}

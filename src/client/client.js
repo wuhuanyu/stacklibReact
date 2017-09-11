@@ -70,6 +70,7 @@ window.client = (function () {
     }
 
     let getNewsByTag = (source, tag, count = 5, fields) => {
+       
         let newss = cache[source].tags[tag];
         if (count <= newss.length) {
             return Promise.all(newss.map(id => getNewsById(source, id, fields)));
@@ -79,10 +80,10 @@ window.client = (function () {
                     return response
                         .json()
                         .then(datas => {
-                            let dataIds = datas.map(data => data._id);
-                            dataIds.forEach(id => pushNewsByTag(source, tag, id));
+                            let dataIds = datas.data.map(data => data._id);
+                            dataIds.forEach(id => cacheClient.pushNewsByTag(source, tag, id));
                             let newIds = cache[source].tags[tag];
-                            return Promise.resolve(newIds.map(id => getNewsById(source, id, fields)));
+                            return Promise.all(newIds.map(id => getNewsById(source, id, fields)));
                         })
                 } else 
                     return Promise.reject(`NetworkError: ${response.status}`);

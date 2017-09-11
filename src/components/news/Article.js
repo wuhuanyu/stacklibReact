@@ -59,9 +59,7 @@ class Article extends Component {
 
     componentDidMount() {
         let {source, id} = this.props.match.params;
-        // console.log(this.props.match);
         let client = window.client;
-        // console.log(source);
 
         if (source !== 'medium') {
             
@@ -188,25 +186,7 @@ class Article extends Component {
 
 }
 
-// const Article = ({article, source, tag, classes}) => {     let texts = null;
-// if (article.text) {         texts = article             .text .map((t, idx)
-// => {                 return <Text key={idx + article._id} t={t}/> })     }
-// return (         <div>             <AppBar position="static" style={{  width:
-// '100%'             }}>            <Toolbar disableGutters>       <IconButton
-// className={classes.menuButton} color="contrast" aria-label="Menu">
-// <MenuIcon/>                     </IconButton> <Typography type="title"
-// color="inherit" className={classes.flex}> {"News"}        </Typography>
-// <Button color="contrast">Share</Button> </Toolbar>  </AppBar> <Paper
-// elevation={2} className={classes.root}>         <Typography type="headline"
-// component="h3"                   gutterBottom className={classes.title}>
-// {article.title} </Typography> <Typography   style={{               float:
-// 'right'                 }} type="caption"                 gutterBottom>
-// {article.timestamp} </Typography>                 <Typography
-// type="subheading"   gutterBottom       style={{ clear: 'right'  }}>
-// {"Summary: " + article.summary} </Typography>                 <div
-// className={classes.imgContainer}>   <img src={article.image_urls &&
-// article.image_urls[0]} className={classes.img}/>                 </div>
-// {texts}        </Paper>        </div>     ) }
+
 
 Article.PropTypes = {
     source: PropTypes.string.isRequired,
