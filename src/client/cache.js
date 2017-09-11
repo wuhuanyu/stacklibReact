@@ -1,5 +1,6 @@
 window.cacheClient = (() => {
     const cache = {
+        currentSource:0,
         medium: {
             recent: [],
             data: []
@@ -14,6 +15,7 @@ window.cacheClient = (() => {
                 business: [],
                 entertainment: [],
                 life:[],
+                asia:[],
             },
             recent: {
                 politics: [],
@@ -23,6 +25,7 @@ window.cacheClient = (() => {
                 business: [],
                 entertainment: [],
                 life:[],
+                asia:[],
             },
             data: []
         },
@@ -30,19 +33,23 @@ window.cacheClient = (() => {
             header: 0,
             tags: {
                 politics: [],
+                entertainment:[],
                 china: [],
                 life: [],
                 tech: [],
                 business: [],
-                health: []
+                health: [],
+                sport:[],
             },
             recent: {
+                entertainment:[],
                 politics: [],
                 china: [],
                 life: [],
                 tech: [],
                 business: [],
-                health: []
+                health: [],
+                sport:[],
             },
             data: []
         },
@@ -54,10 +61,12 @@ window.cacheClient = (() => {
                 life: [],
                 tech: [],
                 business: [],
+                entertainment:[],
                 art: [],
                 sport: []
             },
             recent: {
+                entertainment:[],
                 politics: [],
                 china: [],
                 life: [],

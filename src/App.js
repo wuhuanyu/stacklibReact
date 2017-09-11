@@ -33,6 +33,7 @@ class App extends Component {
 
     handleSwitchTag(e, index) {
         this.setState({current: index});
+        window.cacheClient.cache.currentSource= index;
         this.forceUpdate();
     }
 
@@ -46,8 +47,8 @@ class App extends Component {
                     handleChange={this
                     .handleSwitchTag
                     .bind(this)}
-                    current={current}/>
-                <MainContainer source={sources[current].toLowerCase()}/>
+                    current={window.cacheClient.cache.currentSource}/>
+                <MainContainer source={sources[window.cacheClient.cache.currentSource].toLowerCase()}/>
             </div>
 
         )

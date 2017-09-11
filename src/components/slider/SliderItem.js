@@ -22,8 +22,8 @@ class SliderItem extends Component {
                     src={item.src}
                     alt={item.alt}
                     style={{
-                    height: 'auto',
-                    width: '100%'
+                    height: '250px',
+                    width: '100%',
                 }}/>
             </li>
         )

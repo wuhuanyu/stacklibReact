@@ -15,7 +15,7 @@ const RouterEntry = (props) => {
                 <Route path={"/about"} exact component={About}/>
                 <Route path={"/feedback"} exact component={Feedback}/>
                 <Route path={"/tag/:source/:tag"} exact component={TaggedNewsContainer}/>
-                <Route path={"/news/:source/:id"} exact component={Article}/>
+                <Route path={"/:source/:id"} exact component={Article}/>
             </div>
         </Router>
     )

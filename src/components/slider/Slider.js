@@ -37,7 +37,7 @@ class Slider extends Component {
 
 
 
-    componentWillUmount() {
+    componentWillUnmount() {
         this.stopPlay();
     }
 

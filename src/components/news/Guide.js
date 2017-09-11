@@ -6,8 +6,11 @@ import Header from './Header';
 import {NewsTags, NewsListItemFields} from '../../constants/Constants';
 import {domain,host,port} from '../../constants/Constants';
 import {capitalize} from '../../utility/Utils';
+import {Tags} from '../../constants/Constants';
+
 const cloneDeep = require('clone-deep');
 const tag_img__base = `http://${host}:${port}/static/images/`;
+
 class Guide extends Component {
     constructor(props) {
         super(props);
@@ -24,7 +27,11 @@ class Guide extends Component {
 
     fetchData(source) {
         let client = window.client;
-        NewsTags.forEach(tag => client.getNewsRecent(source, tag, 2, NewsListItemFields).then(datas => {
+        this.setState({
+            headerData:{},
+            listData:{},
+        })
+        Tags[source].forEach(tag => client.getNewsRecent(source, tag, 2, NewsListItemFields).then(datas => {
             let newListData = cloneDeep(this.state.listData);
             newListData[tag] = datas
             this.setState({listData: newListData})
@@ -37,8 +44,12 @@ class Guide extends Component {
 
     }
     componentWillReceiveProps(nextProps) {
+        console.log('[Guide#componentWillReceiveProps]');
+        console.log('New source '+nextProps.source);
+        console.log('oldSource ')
+
         let {source} = nextProps;
-        let oldSource = this.props.Source;
+        let oldSource = this.props.source;
         if (source !== oldSource) {
            this.fetchData(source); 
         }
