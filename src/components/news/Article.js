@@ -92,7 +92,8 @@ class Article extends Component {
             url,
             summary,
             _id,
-            tag
+            tag,
+            crawled_at,
         } = this.state.data;
 
         let texts = null;
@@ -101,6 +102,8 @@ class Article extends Component {
                 return <Text key={idx + _id} t={t}/>
             })
         }
+
+        let time = timestamp||crawled_at;
         return (
             <div>
                 <AppBar
@@ -144,15 +147,14 @@ class Article extends Component {
                         flexDirection: 'row-reverse',
                         alignItems: 'center'
                     }}>
-                        {timestamp
-                            ? <Typography
+                        {
+                             <Typography
                                     style={{
                                     marginRight: '6px'
                                 }}
                                     gutterBottom>
-                                    {num2Time(timestamp)}
+                                    {num2Time(time)}
                                 </Typography>
-                            : null
 }
                         {tag
                             ? <Chip

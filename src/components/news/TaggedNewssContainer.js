@@ -33,7 +33,7 @@ class TaggedNewssContainer extends Component {
         let client = window.client;
         const _this = this;
         client
-            .getNewsByTag(source, tag, 3, NewsListItemFields)
+            .getNewsByTag(source, tag, count, NewsListItemFields)
             .then(datas => {
                 _this.setState({data: datas})
             })
@@ -47,7 +47,7 @@ class TaggedNewssContainer extends Component {
             cT: Tags[source].indexOf(tag),
             cS: sources.indexOf(source)
         })
-        this.fetchData(source, tag, 3, AllNewsFields);
+        this.fetchData(source, tag, 6, AllNewsFields);
     }
 
     componentWillReceiveProps(nextProps) {}
@@ -63,7 +63,7 @@ class TaggedNewssContainer extends Component {
         if (idx !== this.state.cS) {
             this.setState({cS: idx, tags: Tags[selectedSource]});
             let {sources, tags, cS, cT} = this.state;
-            this.fetchData(sources[idx], tags[cT], 5, AllNewsFields);
+            this.fetchData(sources[idx], tags[cT], 6, AllNewsFields);
         }
 
     }
@@ -71,7 +71,7 @@ class TaggedNewssContainer extends Component {
         if (idx !== this.state.cT) {
             this.setState({cT: idx})
             let {sources, tags, cS, cT} = this.state;
-            this.fetchData(sources[cS], tags[idx], 5, AllNewsFields);
+            this.fetchData(sources[cS], tags[idx], 6, AllNewsFields);
         }
     }
 

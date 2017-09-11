@@ -10,9 +10,10 @@ import Chip from 'material-ui/Chip';
 import ButtonBase from 'material-ui/ButtonBase';
 import Tag from './Tag';
 import {host, port} from '../../constants/Constants';
-const tag_img_url = `http://${host}:${port}/static/images/`;
 import {Link} from 'react-router-dom';
 import {withLink} from '../withLink';
+
+const tag_img_url = `http://${host}:${port}/static/images/`;
 class NewsByTag extends Component {
     constructor(props) {
         super(props);
@@ -20,7 +21,6 @@ class NewsByTag extends Component {
 
     render() {
         let {newss, classes, tag_img_url, tag, source} = this.props;
-        // console.log('[NewsByTag]  '); console.log(source); console.log(tag);
         let items = newss.map((d, idx) => <Link
             style={{
             textDecoration: 'none'

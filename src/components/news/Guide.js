@@ -6,6 +6,7 @@ import Header from './Header';
 import {NewsTags, NewsListItemFields} from '../../constants/Constants';
 import {domain,host,port} from '../../constants/Constants';
 import {capitalize} from '../../utility/Utils';
+import {Link} from 'react-router-dom';
 import {Tags} from '../../constants/Constants';
 
 const cloneDeep = require('clone-deep');
@@ -76,11 +77,13 @@ class Guide extends Component {
             });
         return (
             <div>
+                <Link to={`/${source}/${state.headerData._id}`} style={{textDecoration:'none'}}>
                 <Header
                     id={state.headerData && state.headerData._id}
                     title={state.headerData && state.headerData.title}
                     summary={state.headerData&&state.headerData.summary}
                     img={state.headerData.image_urls && state.headerData.image_urls[0]}/> 
+                    </Link>
 
                 {newsbytags}
             </div>
