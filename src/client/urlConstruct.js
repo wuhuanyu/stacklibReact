@@ -1,7 +1,4 @@
-const host = "192.168.1.104:3002";
-const url = "/api/v1/";
-// const defaultDomain = host + url;
-import {domain as defaultDomain} from '../constants/Constants';
+import {domain as defaultDomain,host,port} from '../constants/Constants';
 
 
 
@@ -62,3 +59,6 @@ export const constructIdMedium = (id, fields) => {
     console.log('[constructIdMedium] url=' + url);
     return url;
 }
+
+
+export const constructImgUrl = (name)=>`http://${host}:${port}/static/images/${name}.jpg`;

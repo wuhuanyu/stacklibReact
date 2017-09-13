@@ -24,10 +24,13 @@ class Guide extends Component {
     static get component() {
         return "[Guide]";
     }
-    componentWillUnmount() {}
+    componentWillUnmount() {
+        this.props.disableHintHandler();
+    }
 
     fetchData(source) {
         let client = window.client;
+        let _this = this;
         this.setState({
             headerData:{},
             listData:{},
@@ -40,23 +43,22 @@ class Guide extends Component {
         client
             .getNewsRecent(source, 'tech', 1, NewsListItemFields)
             .then(data => {
+                _this.props.disableHintHandler();
                 this.setState({headerData: data[0]});
             })
 
     }
     componentWillReceiveProps(nextProps) {
-        console.log('[Guide#componentWillReceiveProps]');
-        console.log('New source '+nextProps.source);
-        console.log('oldSource ')
-
         let {source} = nextProps;
         let oldSource = this.props.source;
         if (source !== oldSource) {
+            this.props.enableHintHandler();
            this.fetchData(source); 
         }
     }
 
     componentDidMount() {
+        this.props.enableHintHandler();
         this.fetchData(this.props.source);
     }
 
@@ -92,7 +94,9 @@ class Guide extends Component {
 }
 
 Guide.propTypes = {
-    source: PropTypes.string.isRequired
+    source: PropTypes.string.isRequired,
+    disableHintHandler:PropTypes.func.isRequired,
+    enableHintHandler:PropTypes.func.isRequired,
 };
 
 export default Guide;

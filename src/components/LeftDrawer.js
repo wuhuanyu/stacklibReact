@@ -13,11 +13,12 @@ import SendIcon from 'material-ui-icons/Send';
 import MailIcon from 'material-ui-icons/Mail';
 import DeleteIcon from 'material-ui-icons/Delete';
 import ReportIcon from 'material-ui-icons/Report';
-import reading from '../repository/books_drawer.jpg';
 import FeedBack from 'material-ui-icons/Feedback';
 import {Link} from 'react-router-dom';
 import Avatar from 'material-ui/Avatar';
 import doge from  '../imgs/doge.jpg';
+import {constructImgUrl} from '../client/urlConstruct';
+
 import Info from 'material-ui-icons/Info';
 const styleSheet = theme => ({
     list: {
@@ -42,7 +43,7 @@ class LeftDrawer extends Component {
                         position:'relative',
                     }}>
                         <img
-                            src={reading}
+                            src={constructImgUrl('books_drawer')}
                             style={{
                             width: "100%",
                             height: 'auto'

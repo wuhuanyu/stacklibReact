@@ -26,7 +26,7 @@ class App extends Component {
         super(props);
         this.state = {
             current: 0,
-            sources: ['MEDIUM','BBC', 'MBOOK', 'REUTERS', 'CNN']
+            sources: ['BBC', 'MBOOK', 'REUTERS', 'CNN','MEDIUM']
         };
 
     }
