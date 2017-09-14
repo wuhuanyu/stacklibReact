@@ -50,9 +50,6 @@ node ./devServer.js
 ## Contributing
 欢迎Issue，pull，fork，更欢迎加入这个项目！
 
-## Authors
-
-
 
 ## License
 
