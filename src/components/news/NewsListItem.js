@@ -8,6 +8,7 @@ import Divider from 'material-ui/Divider';
 import Card,{CardContent,CardMedia} from 'material-ui/Card';
 import {withLink} from '../withLink';
 import {Link} from 'react-router-dom'
+import {constructImgUrl} from '../../client/urlConstruct';
 const NewsListItem = (props) => {
     let {title,img}= props;
     return (
@@ -51,7 +52,7 @@ const NewsListItem = (props) => {
                     }}>
                         <img
                             alt={"Eh,Something fails"}
-                            src={img}
+                            src={img||constructImgUrl('imgholder')}
                             style={{
 
                             width: '100%',

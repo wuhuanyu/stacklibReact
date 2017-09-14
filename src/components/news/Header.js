@@ -4,8 +4,6 @@ import Card, {CardActions, CardContent, CardMedia} from 'material-ui/Card';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import PropTypes from 'prop-types';
-import noPic from '../../repository/nopic.jpg';
-import noPic1 from '../../repository/noPic1.jpg';
 import classNames from 'classnames';
 import {BrowserRouter as Router, Link, Route, NavLink} from 'react-router-dom';
 

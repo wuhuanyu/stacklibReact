@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import noPic from '../../repository/nopic.jpg';
 import NewsByTag from './NewsByTag';
 import Header from './Header';
 import {NewsTags, NewsListItemFields} from '../../constants/Constants';
-import {domain,host,port} from '../../constants/Constants';
+import {domain, host, port} from '../../constants/Constants';
 import {capitalize} from '../../utility/Utils';
 import {Link} from 'react-router-dom';
 import {Tags} from '../../constants/Constants';
@@ -25,26 +24,38 @@ class Guide extends Component {
         return "[Guide]";
     }
     componentWillUnmount() {
-        this.props.disableHintHandler();
+        this
+            .props
+            .disableHintHandler();
+    }
+
+    handlerError() {
+        this
+            .props
+            .handleError();
     }
 
     fetchData(source) {
         let client = window.client;
         let _this = this;
-        this.setState({
-            headerData:{},
-            listData:{},
-        })
+        this.setState({headerData: {}, listData: {}})
         Tags[source].forEach(tag => client.getNewsRecent(source, tag, 2, NewsListItemFields).then(datas => {
             let newListData = cloneDeep(this.state.listData);
             newListData[tag] = datas
             this.setState({listData: newListData})
+        }).catch(e => {
+            _this.handlerError();
         }))
         client
             .getNewsRecent(source, 'tech', 1, NewsListItemFields)
             .then(data => {
-                _this.props.disableHintHandler();
+                _this
+                    .props
+                    .disableHintHandler();
                 this.setState({headerData: data[0]});
+            })
+            .catch(e => {
+                _this.handleError();
             })
 
     }
@@ -52,13 +63,17 @@ class Guide extends Component {
         let {source} = nextProps;
         let oldSource = this.props.source;
         if (source !== oldSource) {
-            this.props.enableHintHandler();
-           this.fetchData(source); 
+            this
+                .props
+                .enableHintHandler();
+            this.fetchData(source);
         }
     }
 
     componentDidMount() {
-        this.props.enableHintHandler();
+        this
+            .props
+            .enableHintHandler();
         this.fetchData(this.props.source);
     }
 
@@ -79,13 +94,17 @@ class Guide extends Component {
             });
         return (
             <div>
-                <Link to={`/${source}/${state.headerData._id}`} style={{textDecoration:'none'}}>
-                <Header
-                    id={state.headerData && state.headerData._id}
-                    title={state.headerData && state.headerData.title}
-                    summary={state.headerData&&state.headerData.summary}
-                    img={state.headerData.image_urls && state.headerData.image_urls[0]}/> 
-                    </Link>
+                <Link
+                    to={`/${source}/${state.headerData._id}`}
+                    style={{
+                    textDecoration: 'none'
+                }}>
+                    <Header
+                        id={state.headerData && state.headerData._id}
+                        title={state.headerData && state.headerData.title}
+                        summary={state.headerData && state.headerData.summary}
+                        img={state.headerData.image_urls && state.headerData.image_urls[0]}/>
+                </Link>
 
                 {newsbytags}
             </div>
@@ -95,8 +114,8 @@ class Guide extends Component {
 
 Guide.propTypes = {
     source: PropTypes.string.isRequired,
-    disableHintHandler:PropTypes.func.isRequired,
-    enableHintHandler:PropTypes.func.isRequired,
+    disableHintHandler: PropTypes.func.isRequired,
+    enableHintHandler: PropTypes.func.isRequired
 };
 
 export default Guide;

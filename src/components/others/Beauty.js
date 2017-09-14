@@ -11,18 +11,7 @@ import withAppBar from './withAppBar';
 
 const api = "http://gank.io/api/data/%E7%A6%8F%E5%88%A9/5/1";
 
-// const BeautyItem = ({url}) => {
-//     return (
-//         <Card>
-//             <img
-//                 src={url}
-//                 style={{
-//                 width: '100%',
-//                 height: 'auto'
-//             }}/> 
-//         </Card>
-//     )
-// }
+
 
 class Beauties extends Component {
     constructor(props) {

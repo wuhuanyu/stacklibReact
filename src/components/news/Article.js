@@ -15,6 +15,7 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
+import {constructImgUrl} from '../../client/urlConstruct';
 import MenuIcon from 'material-ui-icons/Menu';
 import {AllNewsFields, AllBlogFields} from '../../constants/Constants';
 import {num2Time} from '../../utility/Utils';
@@ -178,7 +179,7 @@ class Article extends Component {
                             : null}
                     </Typography>
                     <div className={classes.imgContainer}>
-                        <img src={image_urls && image_urls[0]} className={classes.img}/>
+                        <img src={image_urls && image_urls[0]||constructImgUrl('imgholder')} className={classes.img}/>
                     </div>
                     {texts}
                 </Paper>

@@ -13,7 +13,7 @@ export const constructRecentNewsUrl = (source, tag, count = 5, fields) => {
     let _count = "count=" + count;
 
     url = url + _tag + _fields + _count;
-    console.log('[constructRecentNewsUrl ] url=' + url);
+    // console.log('[constructRecentNewsUrl ] url=' + url);
     return url;
 };
 export const constructIdNewsUrl = (source, id, fields) => {
@@ -22,7 +22,7 @@ export const constructIdNewsUrl = (source, id, fields) => {
         ? "fields=" + fields.join(',')
         : '';
     url = url + _fields;
-    console.log('[constructIdNewsUrl] url=' + url);
+    // console.log('[constructIdNewsUrl] url=' + url);
     return url;
 };
 
@@ -33,7 +33,7 @@ export const constructTagNewsUrl = (source, tag, count = 5, fields) => {
         : '';
     let _count = "count=" + count;
     url = url + _fields + _count;
-    console.log('[constructTagNewsUrl] url=' + url);
+    // console.log('[constructTagNewsUrl] url=' + url);
     return url;
 }
 
@@ -45,7 +45,7 @@ export const constructRecentMedium = (count = 5, fields) => {
         : '';
 
     url = url + _fields + count;
-    console.log('[constructRecentMedium] url=' + url);
+    // console.log('[constructRecentMedium] url=' + url);
     return url;
 }
 
@@ -56,7 +56,7 @@ export const constructIdMedium = (id, fields) => {
         : '';
 
     url = url + _fields;
-    console.log('[constructIdMedium] url=' + url);
+    // console.log('[constructIdMedium] url=' + url);
     return url;
 }
 
