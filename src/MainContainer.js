@@ -30,7 +30,7 @@ class MainContainer extends Component {
     }
 
     disableError() {
-        thi.setState({error: false})
+        this.setState({error: false})
     }
 
     renderContent(source) {

@@ -54,7 +54,7 @@ export const Tags = {
         'sport'
     ]
 };
-
-export const host = "localhost";
+const ali = "139.224.118.55";
+export const host = ali;
 export const port = "3002";
 export const domain = host + ":" + port + "/api/v1/";;
