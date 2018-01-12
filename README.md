@@ -42,6 +42,13 @@ node ./devServer.js
 ```
 
 
+### Demo
+![pic1](https://github.com/wuhuanyu/stacklibReact/blob/no_redux/stacklib1.jpeg)
+![pic2](https://github.com/wuhuanyu/stacklibReact/blob/no_redux/stacklib2.jpeg)
+![pic3](https://github.com/wuhuanyu/stacklibReact/blob/no_redux/stacklib3.jpeg)
+![pic4](https://github.com/wuhuanyu/stacklibReact/blob/no_redux/stacklib4.jpeg)
+![pic5](https://github.com/wuhuanyu/stacklibReact/blob/no_redux/stacklib5.jpeg)
+
 ## Built With
 
 * [React](https://facebook.github.io/react/) 
